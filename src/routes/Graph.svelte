@@ -2,6 +2,7 @@
   import logo from "$lib/logo_tomas.png";
   import { onMount } from "svelte";
   import * as d3 from "d3";
+  import Background from "./Background.svelte";
 
   interface NodeDatum extends d3.SimulationNodeDatum {
     id: number;
@@ -77,20 +78,7 @@
   {height}
   viewBox="{-width / 2} {-height / 2} {width} {height}"
 >
-  <defs>
-    <linearGradient id="sunsetGradient" x1="0.5" y1="0" x2="0.5" y2="1">
-      <stop offset="0%" style="stop-color:#FF7F50;stop-opacity:0.7" />
-      <stop offset="50%" style="stop-color:#FF4500;stop-opacity:0.7" />
-      <stop offset="100%" style="stop-color:#FF1493;stop-opacity:0.7" />
-    </linearGradient>
-  </defs>
-  <rect
-    x={-width / 2}
-    y={-height / 2}
-    {width}
-    {height}
-    fill="url(#sunsetGradient)"
-  />
+  <Background {width} {height} />
   <image
     href={logo}
     x={-width / 2}
