@@ -1,5 +1,4 @@
 <script lang="ts">
-
   import { onMount } from "svelte";
   import * as d3 from "d3";
   import Background from "./Background.svelte";
@@ -88,6 +87,12 @@
         cx={node.x}
         cy={node.y}
       />
+      <text
+        x={node.x}
+        y={node.y}
+        text-anchor="middle"
+        dominant-baseline="middle">{node.label}</text
+      >
     {/each}
   </g></svg
 >
