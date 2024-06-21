@@ -1,4 +1,5 @@
 <script lang="ts">
+  import logo from "$lib/logo_tomas.png";
   import { onMount } from "svelte";
   import * as d3 from "d3";
 
@@ -9,14 +10,12 @@
   interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {}
 
   export let nodes: NodeDatum[];
-  export let links: LinkDatum[];
 
   let svg: SVGSVGElement;
   let width = 500;
   let height = 600;
   const nodeRadius = 45;
 
-  $: links = links.map((d) => Object.create(d));
   $: nodes = nodes.map((d) => Object.create(d));
 
   const colourScale = d3.scaleOrdinal(d3.schemeCategory10);
@@ -26,14 +25,7 @@
   onMount(() => {
     simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
-      .force(
-        "link",
-        d3
-          .forceLink<NodeDatum, LinkDatum>(links)
-          .id((d) => d.id)
-          .distance(100)
-      )
-      .force("charge", d3.forceManyBody().strength(-300))
+      .force("charge", d3.forceManyBody())
       .force("collide", d3.forceCollide(nodeRadius))
       .on("tick", simulationUpdate);
 
@@ -51,7 +43,6 @@
   function simulationUpdate() {
     simulation.tick();
     nodes = [...nodes];
-    links = [...links];
   }
 
   type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>;
@@ -84,19 +75,31 @@
   bind:this={svg}
   {width}
   {height}
-  viewBox="{-(width / 2) + 100} {-height / 2} {width} {height}"
+  viewBox="{-width / 2} {-height / 2} {width} {height}"
 >
+  <defs>
+    <linearGradient id="sunsetGradient" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" style="stop-color:#FF7F50;stop-opacity:0.7" />
+      <stop offset="50%" style="stop-color:#FF4500;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#FF1493;stop-opacity:0.7" />
+    </linearGradient>
+  </defs>
+  <rect
+    x={-width / 2}
+    y={-height / 2}
+    {width}
+    {height}
+    fill="url(#sunsetGradient)"
+  />
+  <image
+    href={logo}
+    x={-width / 2}
+    y={-height / 2}
+    {width}
+    {height}
+    opacity={0.6}
+  />
   <g id="graph">
-    <!-- {#each links as link}
-      <g stroke="#999" stroke-opacity="0.6">
-        <line
-          x1={(link.source as NodeDatum).x}
-          y1={(link.source as NodeDatum).y}
-          x2={(link.target as NodeDatum).x}
-          y2={(link.target as NodeDatum).y}
-        />
-    {/each} -->
-
     {#each nodes as node}
       <circle
         class="node"
