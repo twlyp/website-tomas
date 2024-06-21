@@ -1,5 +1,5 @@
 <script lang="ts">
-  import logo from "$lib/logo_tomas.png";
+
   import { onMount } from "svelte";
   import * as d3 from "d3";
   import Background from "./Background.svelte";
@@ -79,14 +79,6 @@
   viewBox="{-width / 2} {-height / 2} {width} {height}"
 >
   <Background {width} {height} />
-  <image
-    href={logo}
-    x={-width / 2}
-    y={-height / 2}
-    {width}
-    {height}
-    opacity={0.6}
-  />
   <g id="graph">
     {#each nodes as node}
       <circle

@@ -1,6 +1,10 @@
 <script lang="ts">
+  import logo from "$lib/logo_tomas.png";
+
   export let width: number;
   export let height: number;
+
+  const logoPadding = 50;
 </script>
 
 <defs>
@@ -43,10 +47,20 @@
     />
   </linearGradient>
 </defs>
+
 <rect
   x={-width / 2}
   y={-height / 2}
   {width}
   {height}
   fill="url(#sunsetGradient)"
+/>
+
+<image
+  href={logo}
+  x={-width / 2 + logoPadding / 2}
+  y={-height / 2 + logoPadding / 2}
+  width={width - logoPadding}
+  height={height - logoPadding}
+  opacity={0.6}
 />
