@@ -4,6 +4,8 @@
   import Background from "./Background.svelte";
   import { currentPage } from "./stores";
   import type { PAGES } from "./constants";
+  // @ts-ignore
+  import forceBoundary from "d3-force-boundary";
 
   interface NodeDatum extends d3.SimulationNodeDatum {
     page: PAGES;
@@ -30,6 +32,12 @@
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
       .force("charge", d3.forceManyBody())
       .force("collide", d3.forceCollide(nodeRadius))
+      .force(
+        "boundary",
+        forceBoundary(-width / 2, -height / 2, width / 2, height / 2).strength(
+          0.001
+        )
+      )
       .on("tick", simulationUpdate);
 
     d3.select(svg as Element).call(
