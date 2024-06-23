@@ -16,7 +16,7 @@
 
   export let nodes: NodeDatum[];
 
-  let svg: SVGSVGElement;
+  let container: HTMLDivElement;
   // biome-ignore lint/style/useConst: <explanation>
   let width = 500;
   // biome-ignore lint/style/useConst: <explanation>
@@ -39,7 +39,7 @@
     simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
       .alphaDecay(0.01)
-      .velocityDecay(0.01)
+      .velocityDecay(0.1)
       .force("charge", d3.forceManyBody())
       .force("collide", d3.forceCollide(nodeRadius))
       .force(
@@ -50,10 +50,10 @@
       )
       .on("tick", simulationUpdate);
 
-    d3.select(svg as Element).call(
+    d3.select(container as Element).call(
       d3
         .drag()
-        .container(svg)
+        .container(container)
         .subject(dragsubject)
         .on("start", dragstarted)
         .on("drag", dragged)
@@ -69,7 +69,12 @@
   type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>;
 
   function dragsubject(event: DragEvent) {
-    return simulation.find(event.x, event.y, nodeRadius);
+    const node = simulation.find(
+      event.x - width / 2,
+      event.y - height / 2,
+      nodeRadius
+    );
+    return node;
   }
 
   function dragstarted(event: DragEvent) {
@@ -90,36 +95,30 @@
   }
 </script>
 
-<svelte:window bind:innerWidth={width} bind:innerHeight={height} />
-
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<svg
-  bind:this={svg}
-  {width}
-  {height}
-  viewBox="{-width / 2} {-height / 2} {width} {height}"
+<div
+  bind:clientWidth={width}
+  bind:clientHeight={height}
+  bind:this={container}
+  class="absolute top-0 left-0 w-screen h-screen overflow-hidden"
   on:click={() => currentPage.set(null)}
 >
-  <Background {width} {height} />
-  <g id="graph">
-    {#each nodes as node}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <circle
-        class="node"
-        r={nodeRadius}
-        fill={node.color}
-        cx={node.x}
-        cy={node.y}
-        on:click|stopPropagation={() => currentPage.set(node.page)}
-      />
-      <text
-        x={node.x}
-        y={node.y}
-        text-anchor="middle"
-        dominant-baseline="middle">{node.label}</text
-      >
-    {/each}
-  </g></svg
->
+  {#each nodes as node}
+    <div
+      id={node.page}
+      class="absolute node"
+      style="
+          background-color: {node.color};
+          width: {nodeRadius}px;
+          height: {nodeRadius}px;
+          left: {node.x + width / 2}px;
+          top: {node.y + height / 2}px;
+          border-radius: 50%;
+        "
+      on:click|stopPropagation={() => currentPage.set(node.page)}
+    >
+      <p>{node.label}</p>
+    </div>
+  {/each}
+</div>
