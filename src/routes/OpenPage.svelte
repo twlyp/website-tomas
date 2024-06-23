@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="absolute top-0 left-10 max-w-2xl h-screen overflow-auto no-scrollbar"
+  class="absolute top-0 left-1/2 -translate-x-1/2 w-[640px] h-screen overflow-auto no-scrollbar p-5"
   class:hidden={$currentPage === null}
   style="background-color: {backgroundColor}aa"
 >

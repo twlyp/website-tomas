@@ -23,8 +23,6 @@
 
   $: nodes = nodes.map((d) => Object.create(d));
 
-  const colourScale = d3.scaleOrdinal(d3.schemeCategory10);
-
   let simulation: d3.Simulation<NodeDatum, LinkDatum>;
 
   onMount(() => {
