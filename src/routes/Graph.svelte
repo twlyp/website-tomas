@@ -6,9 +6,9 @@
   import type { PAGES } from "./constants";
 
   interface NodeDatum extends d3.SimulationNodeDatum {
-    id: number;
     page: PAGES;
     label: string;
+    color: string;
   }
   interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {}
 
@@ -76,11 +76,14 @@
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <svg
   bind:this={svg}
   {width}
   {height}
   viewBox="{-width / 2} {-height / 2} {width} {height}"
+  on:click={() => currentPage.set(null)}
 >
   <Background {width} {height} />
   <g id="graph">
@@ -90,12 +93,10 @@
       <circle
         class="node"
         r={nodeRadius}
-        fill={colourScale(node.id.toString())}
+        fill={node.color}
         cx={node.x}
         cy={node.y}
-        on:click={() => {
-          console.log('setting page to ', node.page)
-          currentPage.set(node.page)}}
+        on:click|stopPropagation={() => currentPage.set(node.page)}
       />
       <text
         x={node.x}
