@@ -2,9 +2,12 @@
   import { onMount } from "svelte";
   import * as d3 from "d3";
   import Background from "./Background.svelte";
+  import { currentPage } from "./stores";
+  import type { PAGES } from "./constants";
 
   interface NodeDatum extends d3.SimulationNodeDatum {
     id: number;
+    page: PAGES;
     label: string;
   }
   interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {}
@@ -12,9 +15,11 @@
   export let nodes: NodeDatum[];
 
   let svg: SVGSVGElement;
+  // biome-ignore lint/style/useConst: <explanation>
   let width = 500;
+  // biome-ignore lint/style/useConst: <explanation>
   let height = 600;
-  const nodeRadius = 45;
+  const nodeRadius = 70;
 
   $: nodes = nodes.map((d) => Object.create(d));
 
@@ -80,12 +85,17 @@
   <Background {width} {height} />
   <g id="graph">
     {#each nodes as node}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
       <circle
         class="node"
         r={nodeRadius}
         fill={colourScale(node.id.toString())}
         cx={node.x}
         cy={node.y}
+        on:click={() => {
+          console.log('setting page to ', node.page)
+          currentPage.set(node.page)}}
       />
       <text
         x={node.x}
