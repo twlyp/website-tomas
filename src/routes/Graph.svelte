@@ -23,6 +23,14 @@
   let height = 600;
   const nodeRadius = 70;
 
+  const INITIAL_VELOCITY = 50;
+  nodes = nodes.map((d) => ({
+    ...d,
+    x: Math.random() * width - width / 2,
+    y: Math.random() * height - height / 2,
+    vx: Math.random() * INITIAL_VELOCITY,
+    vy: Math.random() * INITIAL_VELOCITY,
+  }));
   $: nodes = nodes.map((d) => Object.create(d));
 
   let simulation: d3.Simulation<NodeDatum, LinkDatum>;
@@ -30,6 +38,8 @@
   onMount(() => {
     simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
+      .alphaDecay(0.01)
+      .velocityDecay(0.01)
       .force("charge", d3.forceManyBody())
       .force("collide", d3.forceCollide(nodeRadius))
       .force(
