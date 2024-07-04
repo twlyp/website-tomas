@@ -1,4 +1,5 @@
 <script lang="ts">
+    // biome-ignore lint/style/useConst: <explanation>
     export let width = 350;
     $: height = width * 1.5;
 </script>
