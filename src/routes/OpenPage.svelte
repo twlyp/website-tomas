@@ -3,8 +3,14 @@
   import { NODES, PAGES } from "./constants";
   import { currentPage } from "./stores";
   import IconCross from "./IconCross.svelte";
+  import VideoPage from "./video/VideoPage.svelte";
 
-  $: Content = $currentPage === PAGES.PHOTO ? Photo : null;
+  $: Content =
+    $currentPage === PAGES.PHOTO
+      ? Photo
+      : $currentPage === PAGES.VIDEO
+        ? VideoPage
+        : null;
   $: backgroundColor = NODES.find((d) => d.page === $currentPage)?.color;
 </script>
 
@@ -20,4 +26,5 @@
     on:click={() => currentPage.set(null)}
   >
     <IconCross />
+  </button>
 </div>
