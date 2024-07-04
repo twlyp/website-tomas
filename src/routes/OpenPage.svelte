@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Photo from "./Photo.svelte";
+  import Photo from "./photo/Photo.svelte";
   import { NODES, PAGES } from "./constants";
   import { currentPage } from "./stores";
 
