@@ -2,6 +2,7 @@
   import Photo from "./photo/Photo.svelte";
   import { NODES, PAGES } from "./constants";
   import { currentPage } from "./stores";
+  import IconCross from "./IconCross.svelte";
 
   $: Content = $currentPage === PAGES.PHOTO ? Photo : null;
   $: backgroundColor = NODES.find((d) => d.page === $currentPage)?.color;
@@ -13,4 +14,10 @@
   style="background-color: {backgroundColor}aa"
 >
   <svelte:component this={Content} />
+
+  <button
+    class="absolute top-5 right-5 bg-none rounded-full"
+    on:click={() => currentPage.set(null)}
+  >
+    <IconCross />
 </div>
