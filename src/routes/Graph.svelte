@@ -107,7 +107,7 @@
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <circle
-        class="node"
+        class="node cursor-pointer"
         r={nodeRadius}
         fill={node.color}
         cx={node.x}
@@ -115,11 +115,14 @@
         on:click|stopPropagation={() => currentPage.set(node.page)}
       />
       <text
+        class="cursor-pointer"
         x={node.x}
         y={node.y}
         text-anchor="middle"
-        dominant-baseline="middle">{node.label}</text
-      >
+        dominant-baseline="middle"
+        on:click|stopPropagation={() => currentPage.set(node.page)}
+        >{node.label}
+      </text>
     {/each}
   </g></svg
 >
