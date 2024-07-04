@@ -1,7 +1,10 @@
 <script lang="ts">
+  const ASPECT_RATIO = 7 / 4
+
   export let width = 560;
-  export let height = 315;
   export let videoId: string;
+  
+  const height = width / ASPECT_RATIO;
 </script>
 
 <iframe
