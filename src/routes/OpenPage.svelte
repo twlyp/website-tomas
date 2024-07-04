@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Photo from "./photo/Photo.svelte";
+  import PhotoPage from "./photo/PhotoPage.svelte";
   import { NODES, PAGES } from "./constants";
   import { currentPage } from "./stores";
   import IconCross from "./IconCross.svelte";
@@ -9,7 +9,7 @@
   function getPageComponent(page: PAGES | null) {
     switch (page) {
       case PAGES.PHOTO:
-        return Photo;
+        return PhotoPage;
       case PAGES.VIDEO:
         return VideoPage;
       case PAGES.MUSIC:
