@@ -4,13 +4,22 @@
   import { currentPage } from "./stores";
   import IconCross from "./IconCross.svelte";
   import VideoPage from "./video/VideoPage.svelte";
+  import MusicPage from "./music/MusicPage.svelte";
 
-  $: Content =
-    $currentPage === PAGES.PHOTO
-      ? Photo
-      : $currentPage === PAGES.VIDEO
-        ? VideoPage
-        : null;
+  function getPageComponent(page: PAGES | null) {
+    switch (page) {
+      case PAGES.PHOTO:
+        return Photo;
+      case PAGES.VIDEO:
+        return VideoPage;
+      case PAGES.MUSIC:
+        return MusicPage;
+      default:
+        return null;
+    }
+  }
+
+  $: Content = getPageComponent($currentPage);
   $: backgroundColor = NODES.find((d) => d.page === $currentPage)?.color;
 </script>
 
