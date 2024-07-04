@@ -3,8 +3,8 @@
 
   export let width = 560;
   export let videoId: string;
-  
-  const height = width / ASPECT_RATIO;
+
+  $: height = width / ASPECT_RATIO;
 </script>
 
 <iframe
