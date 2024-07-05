@@ -92,7 +92,6 @@
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <svg
   bind:this={svg}
@@ -100,11 +99,11 @@
   {height}
   viewBox="{-width / 2} {-height / 2} {width} {height}"
   on:click={() => currentPage.set(null)}
+  on:keydown={(e) => e.key === "Escape" && currentPage.set(null)}
 >
   <Background {width} {height} />
   <g id="graph">
     {#each nodes as node}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <circle
         class="node cursor-pointer"
@@ -115,6 +114,7 @@
         cx={node.x}
         cy={node.y}
         on:click|stopPropagation={() => currentPage.set(node.page)}
+        on:keydown|stopPropagation={(e) => e.key === "Enter" && currentPage.set(node.page)}
       />
       <text
         class="cursor-pointer"
@@ -123,6 +123,7 @@
         text-anchor="middle"
         dominant-baseline="middle"
         on:click|stopPropagation={() => currentPage.set(node.page)}
+        on:keydown|stopPropagation={(e) => e.key === "Enter" && currentPage.set(node.page)}
         >{node.label}
       </text>
     {/each}
