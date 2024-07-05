@@ -37,8 +37,9 @@
   onMount(() => {
     simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(nodes)
-      .alphaDecay(0.01)
-      .velocityDecay(0.01)
+      .alphaDecay(0.02)
+      .velocityDecay(0.02)
+      .alphaTarget(0.2)
       .force("charge", d3.forceManyBody())
       .force("collide", d3.forceCollide(nodeRadius))
       .force(
