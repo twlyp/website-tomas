@@ -3,14 +3,13 @@
   import * as d3 from "d3";
   import Background from "./Background.svelte";
   import { currentPage } from "./stores";
-  import type { PAGES } from "./constants";
+  import { NODE_COLORS, type PAGES } from "./constants";
   // @ts-ignore
   import forceBoundary from "d3-force-boundary";
 
   interface NodeDatum extends d3.SimulationNodeDatum {
     page: PAGES;
     label: string;
-    color: string;
   }
   interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {}
 
@@ -109,7 +108,7 @@
       <circle
         class="node cursor-pointer"
         r={nodeRadius}
-        fill={node.color}
+        fill={NODE_COLORS[node.page]}
         cx={node.x}
         cy={node.y}
         on:click|stopPropagation={() => currentPage.set(node.page)}

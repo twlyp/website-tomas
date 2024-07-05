@@ -10,10 +10,26 @@ export enum PAGES {
 
 const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
+export const NODE_COLORS = {
+	[PAGES.PHOTO]: colorScale("0"),
+	[PAGES.VIDEO]: colorScale("1"),
+	[PAGES.EXHIBITIONS]: colorScale("2"),
+	[PAGES.MUSIC]: colorScale("3"),
+	[PAGES.BIO]: colorScale("4"),
+};
+
 export const NODES = [
-	{ page: PAGES.PHOTO, label: "photo", color: colorScale("0") },
-	{ page: PAGES.VIDEO, label: "video", color: colorScale("1") },
-	{ page: PAGES.EXHIBITIONS, label: "exhibitions", color: colorScale("2") },
-	{ page: PAGES.MUSIC, label: "music", color: colorScale("3") },
-	{ page: PAGES.BIO, label: "bio", color: colorScale("4") },
+	{ page: PAGES.PHOTO, label: "photo" },
+	{ page: PAGES.VIDEO, label: "video" },
+	{ page: PAGES.EXHIBITIONS, label: "exhibitions" },
+	{ page: PAGES.MUSIC, label: "music" },
+	{ page: PAGES.BIO, label: "bio" },
 ];
+
+export const BACKGROUND_COLORS = {
+	[PAGES.PHOTO]: "#FFFFFFCC",
+	[PAGES.VIDEO]: "#101010CC",
+	[PAGES.MUSIC]: `${NODE_COLORS[PAGES.MUSIC]}AA`,
+	[PAGES.EXHIBITIONS]: `${NODE_COLORS[PAGES.EXHIBITIONS]}AA`,
+	[PAGES.BIO]: `${NODE_COLORS[PAGES.BIO]}AA`,
+};
