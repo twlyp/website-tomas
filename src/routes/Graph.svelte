@@ -108,7 +108,9 @@
       <circle
         class="node cursor-pointer"
         r={nodeRadius}
-        fill={NODE_COLORS[node.page]}
+        fill={`${NODE_COLORS[node.page]}DD`}
+        stroke={"#FFFFFF22"}
+        stroke-width={2}
         cx={node.x}
         cy={node.y}
         on:click|stopPropagation={() => currentPage.set(node.page)}
