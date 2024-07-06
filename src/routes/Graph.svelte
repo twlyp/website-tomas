@@ -8,10 +8,8 @@
   export let nodes: NodeDatum[];
 
   let svg: SVGSVGElement;
-  // biome-ignore lint/style/useConst: <explanation>
-  let width = 500;
-  // biome-ignore lint/style/useConst: <explanation>
-  let height = 600;
+  let width: number;
+  let height: number;
   const nodeRadius = 70;
 
   const INITIAL_VELOCITY = 50;
@@ -61,39 +59,41 @@
   on:keydown|capture={onKeydownBackground}
 />
 
-<svg
-  bind:this={svg}
-  {width}
-  {height}
-  viewBox="{-width / 2} {-height / 2} {width} {height}"
->
-  <Background {width} {height} />
-  <g id="graph" role="navigation">
-    {#each nodes as node}
-      <g
-        class="node-group cursor-pointer"
-        on:click|stopPropagation={() => onClickNode(node)}
-        on:keydown|stopPropagation={(e) => onKeydownNode(e, node)}
-        role="button"
-        tabindex="0"
-      >
-        <circle
-          class="node"
-          r={nodeRadius}
-          fill={`${NODE_COLORS[node.page]}DD`}
-          stroke={"#FFFFFF22"}
-          stroke-width={2}
-          cx={node.x}
-          cy={node.y}
-        />
-        <text
-          x={node.x}
-          y={node.y}
-          text-anchor="middle"
-          dominant-baseline="middle"
-          >{node.label}
-        </text>
-      </g>
-    {/each}
-  </g></svg
->
+{#if width && height}
+  <svg
+    bind:this={svg}
+    {width}
+    {height}
+    viewBox="{-width / 2} {-height / 2} {width} {height}"
+  >
+    <Background {width} {height} />
+    <g id="graph" role="navigation">
+      {#each nodes as node}
+        <g
+          class="node-group cursor-pointer"
+          on:click|stopPropagation={() => onClickNode(node)}
+          on:keydown|stopPropagation={(e) => onKeydownNode(e, node)}
+          role="button"
+          tabindex="0"
+        >
+          <circle
+            class="node"
+            r={nodeRadius}
+            fill={`${NODE_COLORS[node.page]}DD`}
+            stroke={"#FFFFFF22"}
+            stroke-width={2}
+            cx={node.x}
+            cy={node.y}
+          />
+          <text
+            x={node.x}
+            y={node.y}
+            text-anchor="middle"
+            dominant-baseline="middle"
+            >{node.label}
+          </text>
+        </g>
+      {/each}
+    </g></svg
+  >
+{/if}
