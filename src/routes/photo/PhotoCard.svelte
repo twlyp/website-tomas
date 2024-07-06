@@ -7,7 +7,10 @@
   export let imageAlt: string = title;
 </script>
 
-<div class="w-full h-full flex flex-row items-end">
+<div
+  class="w-full h-full px-10 py-5 flex flex-row items-end {$$props.class}"
+  style={$$props.style}
+>
   <div>
     <h3>{title}</h3>
     <h4>{location}, {date}</h4>
