@@ -26,7 +26,6 @@
   ];
 
   const currentPhotoIdx = writable(Math.floor(Math.random() * photos.length));
-  $: currentPhoto = photos[$currentPhotoIdx];
 
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
@@ -43,26 +42,31 @@
       changePhoto(-1);
     }
   }
+
+  function focus(element: HTMLElement) {
+    element.focus();
+  }
 </script>
 
-<svelte:window on:keydown={onKeydown} />
-
-{#if currentPhoto}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div
-    class="w-full h-full flex flex-row items-end justify-between"
-    on:click|stopPropagation={() => changePhoto(+1)}
-    role="button"
-    tabindex="0"
-  >
-    <div>
-      <h3>{currentPhoto.title}</h3>
-      <h4>{currentPhoto.location}, {currentPhoto.date}</h4>
+{#each photos as photo, idx}
+  {#if idx === $currentPhotoIdx}
+    <div
+      class="w-full h-full flex flex-row items-end"
+      on:click|stopPropagation={() => changePhoto(+1)}
+      on:keydown={onKeydown}
+      role="button"
+      tabindex="0"
+      use:focus
+    >
+      <div>
+        <h3>{photo.title}</h3>
+        <h4>{photo.location}, {photo.date}</h4>
+      </div>
+      <img
+        class="max-h-full max-w-full flex-grow object-contain"
+        src={photo.imageSrc}
+        alt={photo.title}
+      />
     </div>
-    <img
-      class="max-h-full max-w-full"
-      src={currentPhoto.imageSrc}
-      alt={currentPhoto.title}
-    />
-  </div>
-{/if}
+  {/if}
+{/each}
