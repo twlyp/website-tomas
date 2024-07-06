@@ -1,17 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import * as d3 from "d3";
   import Background from "./Background.svelte";
   import { currentPage } from "./stores";
-  import { NODE_COLORS, type PAGES } from "./constants";
-  // @ts-ignore
-  import forceBoundary from "d3-force-boundary";
-
-  interface NodeDatum extends d3.SimulationNodeDatum {
-    page: PAGES;
-    label: string;
-  }
-  interface LinkDatum extends d3.SimulationLinkDatum<NodeDatum> {}
+  import { NODE_COLORS } from "./constants";
+  import { type NodeDatum, startSimulation } from "./dragSimulation";
 
   export let nodes: NodeDatum[];
 
@@ -32,62 +24,18 @@
   }));
   $: nodes = nodes.map((d) => Object.create(d));
 
-  let simulation: d3.Simulation<NodeDatum, LinkDatum>;
-
-  onMount(() => {
-    simulation = d3
-      .forceSimulation<NodeDatum, LinkDatum>(nodes)
-      .alphaDecay(0.02)
-      .velocityDecay(0.02)
-      .alphaTarget(0.2)
-      .force("charge", d3.forceManyBody())
-      .force("collide", d3.forceCollide(nodeRadius))
-      .force(
-        "boundary",
-        forceBoundary(-width / 2, -height / 2, width / 2, height / 2).strength(
-          0.001
-        )
-      )
-      .on("tick", simulationUpdate);
-
-    d3.select(svg as Element).call(
-      d3
-        .drag()
-        .container(svg)
-        .subject(dragsubject)
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended)
-    );
-  });
-
-  function simulationUpdate() {
-    simulation.tick();
-    nodes = [...nodes];
-  }
-
-  type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>;
-
-  function dragsubject(event: DragEvent) {
-    return simulation.find(event.x, event.y, nodeRadius);
-  }
-
-  function dragstarted(event: DragEvent) {
-    if (!event.active) simulation.alphaTarget(0.3).restart();
-    event.subject.fx = event.subject.x;
-    event.subject.fy = event.subject.y;
-  }
-
-  function dragged(event: DragEvent) {
-    event.subject.fx = event.x;
-    event.subject.fy = event.y;
-  }
-
-  function dragended(event: DragEvent) {
-    if (!event.active) simulation.alphaTarget(0);
-    event.subject.fx = null;
-    event.subject.fy = null;
-  }
+  onMount(() =>
+    startSimulation({
+      nodes,
+      nodeRadius,
+      width,
+      height,
+      svg,
+      refreshNodes: () => {
+        nodes = [...nodes];
+      },
+    })
+  );
 
   function onClickBackground() {
     currentPage.set(null);
