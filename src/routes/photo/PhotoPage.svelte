@@ -2,6 +2,7 @@
   import muiopotamos from "$lib/photo/Meta-B54_1340_c.jpg";
   import prologo from "$lib/photo/ASR171_TE_PROLOGO_1_3-7-13-24_1340_c.jpg";
   import vegan from "$lib/photo/ASR184_TE_SV_EDEN_19569_V1A_1340_c.jpg";
+  import PhotoCard from "./PhotoCard.svelte";
 
   const photos = [
     {
@@ -47,25 +48,17 @@
   }
 </script>
 
-{#each photos as photo, idx}
-  {#if idx === currentPhotoIdx}
-    <div
-      class="w-full h-full flex flex-row items-end"
-      on:click|stopPropagation={() => changePhoto(+1)}
-      on:keydown={onKeydown}
-      role="button"
-      tabindex="0"
-      use:focus
-    >
-      <div>
-        <h3>{photo.title}</h3>
-        <h4>{photo.location}, {photo.date}</h4>
-      </div>
-      <img
-        class="max-h-full max-w-full flex-grow object-contain"
-        src={photo.imageSrc}
-        alt={photo.title}
-      />
-    </div>
-  {/if}
-{/each}
+<div
+  class="w-full h-full"
+  on:click|stopPropagation={() => changePhoto(+1)}
+  on:keydown={onKeydown}
+  role="button"
+  tabindex="0"
+  use:focus
+>
+  {#each photos as photo, idx}
+    {#if idx === currentPhotoIdx}
+      <PhotoCard {...photo} />
+    {/if}
+  {/each}
+</div>
