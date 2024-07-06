@@ -2,7 +2,7 @@
   import muiopotamos from "$lib/photo/Meta-B54_1340_c.jpg";
   import prologo from "$lib/photo/ASR171_TE_PROLOGO_1_3-7-13-24_1340_c.jpg";
   import vegan from "$lib/photo/ASR184_TE_SV_EDEN_19569_V1A_1340_c.jpg";
-  import PhotoCard from "./PhotoCard.svelte";
+  import { writable } from "svelte/store";
 
   const photos = [
     {
@@ -25,40 +25,44 @@
     },
   ];
 
-  let currentPhotoIdx = Math.floor(Math.random() * photos.length);
-  $: currentPhoto = photos[currentPhotoIdx];
+  const currentPhotoIdx = writable(Math.floor(Math.random() * photos.length));
+  $: currentPhoto = photos[$currentPhotoIdx];
 
-  function nextPhoto() {
-    currentPhotoIdx = (currentPhotoIdx + 1) % photos.length;
+  function mod(n: number, m: number) {
+    return ((n % m) + m) % m;
   }
 
-  function previousPhoto() {
-    currentPhotoIdx = (currentPhotoIdx - 1) % photos.length;
+  function changePhoto(delta: number) {
+    currentPhotoIdx.set(mod($currentPhotoIdx + delta, photos.length));
   }
 
   function onKeydown(ev: KeyboardEvent) {
     if (ev.key === "ArrowRight" || ev.key === "ArrowDown") {
-      nextPhoto();
+      changePhoto(+1);
     } else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") {
-      previousPhoto();
+      changePhoto(-1);
     }
   }
 </script>
 
-<div
-  class="w-full h-full flex flex-row items-end justify-between"
-  on:click|stopPropagation={nextPhoto}
-  on:keydown={onKeydown}
-  role="button"
-  tabindex="0"
->
-  <div>
-    <h3>{currentPhoto.title}</h3>
-    <h4>{currentPhoto.location}, {currentPhoto.date}</h4>
+<svelte:window on:keydown={onKeydown} />
+
+{#if currentPhoto}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div
+    class="w-full h-full flex flex-row items-end justify-between"
+    on:click|stopPropagation={() => changePhoto(+1)}
+    role="button"
+    tabindex="0"
+  >
+    <div>
+      <h3>{currentPhoto.title}</h3>
+      <h4>{currentPhoto.location}, {currentPhoto.date}</h4>
+    </div>
+    <img
+      class="max-h-full max-w-full"
+      src={currentPhoto.imageSrc}
+      alt={currentPhoto.title}
+    />
   </div>
-  <img
-    class="max-h-full max-w-full"
-    src={currentPhoto.imageSrc}
-    alt={currentPhoto.title}
-  />
-</div>
+{/if}
