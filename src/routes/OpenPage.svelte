@@ -1,10 +1,12 @@
 <script lang="ts">
   import PhotoPage from "./photo/PhotoPage.svelte";
-  import { BACKGROUND_COLORS, NODES, PAGES } from "./constants";
+  import { BACKGROUND_COLORS, PAGES } from "./constants";
   import { currentPage } from "./stores";
   import IconCross from "./IconCross.svelte";
   import VideoPage from "./video/VideoPage.svelte";
   import MusicPage from "./music/MusicPage.svelte";
+  import { scale } from "svelte/transition";
+  import { quadInOut } from "svelte/easing";
 
   const PADDING_X = 20;
   const PADDING_Y = 15;
@@ -25,24 +27,26 @@
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div
-  class="absolute overflow-auto no-scrollbar p-5 px-10 rounded-sm"
-  class:hidden={$currentPage === null}
-  style="background-color: {backgroundColor};
+{#if $currentPage}
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div
+    class="absolute overflow-auto no-scrollbar p-5 px-10 rounded-sm"
+    style="background-color: {backgroundColor};
          width: {width - 2 * PADDING_X}px;
          height: {height - 2 * PADDING_Y}px;
          top: {PADDING_Y}px;
          left: {PADDING_X}px;"
-  on:click|stopPropagation
->
-  <svelte:component this={Content} />
-
-  <button
-    class="absolute top-2 right-2 bg-none rounded-full"
-    on:click={() => currentPage.set(null)}
+    on:click|stopPropagation
+    transition:scale={{ duration: 400, easing: quadInOut }}
   >
-    <IconCross />
-  </button>
-</div>
+    <svelte:component this={Content} />
+
+    <button
+      class="absolute top-2 right-2 bg-none rounded-full"
+      on:click={() => currentPage.set(null)}
+    >
+      <IconCross />
+    </button>
+  </div>
+{/if}
