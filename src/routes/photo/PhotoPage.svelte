@@ -2,7 +2,6 @@
   import muiopotamos from "$lib/photo/Meta-B54_1340_c.jpg";
   import prologo from "$lib/photo/ASR171_TE_PROLOGO_1_3-7-13-24_1340_c.jpg";
   import vegan from "$lib/photo/ASR184_TE_SV_EDEN_19569_V1A_1340_c.jpg";
-  import { writable } from "svelte/store";
 
   const photos = [
     {
@@ -25,14 +24,14 @@
     },
   ];
 
-  const currentPhotoIdx = writable(Math.floor(Math.random() * photos.length));
+  let currentPhotoIdx = Math.floor(Math.random() * photos.length);
 
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
   }
 
   function changePhoto(delta: number) {
-    currentPhotoIdx.set(mod($currentPhotoIdx + delta, photos.length));
+    currentPhotoIdx = mod(currentPhotoIdx + delta, photos.length);
   }
 
   function onKeydown(ev: KeyboardEvent) {
@@ -49,7 +48,7 @@
 </script>
 
 {#each photos as photo, idx}
-  {#if idx === $currentPhotoIdx}
+  {#if idx === currentPhotoIdx}
     <div
       class="w-full h-full flex flex-row items-end"
       on:click|stopPropagation={() => changePhoto(+1)}
