@@ -25,6 +25,8 @@
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   class="absolute overflow-auto no-scrollbar p-5 px-10 rounded-sm"
   class:hidden={$currentPage === null}
@@ -33,6 +35,7 @@
          height: {height - 2 * PADDING_Y}px;
          top: {PADDING_Y}px;
          left: {PADDING_X}px;"
+  on:click|stopPropagation
 >
   <svelte:component this={Content} />
 

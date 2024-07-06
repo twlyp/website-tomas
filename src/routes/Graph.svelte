@@ -88,44 +88,64 @@
     event.subject.fx = null;
     event.subject.fy = null;
   }
+
+  function onClickBackground() {
+    currentPage.set(null);
+  }
+
+  function onKeydownBackground(event: KeyboardEvent) {
+    if (event.key === "Escape") currentPage.set(null);
+  }
+
+  function onClickNode(node: NodeDatum) {
+    currentPage.set(node.page);
+  }
+
+  function onKeydownNode(event: KeyboardEvent, node: NodeDatum) {
+    if (event.key === "Enter") currentPage.set(node.page);
+  }
 </script>
 
-<svelte:window bind:innerWidth={width} bind:innerHeight={height} />
+<svelte:window
+  bind:innerWidth={width}
+  bind:innerHeight={height}
+  on:click={onClickBackground}
+  on:keydown|capture={onKeydownBackground}
+/>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
 <svg
   bind:this={svg}
   {width}
   {height}
   viewBox="{-width / 2} {-height / 2} {width} {height}"
-  on:click={() => currentPage.set(null)}
-  on:keydown={(e) => e.key === "Escape" && currentPage.set(null)}
 >
   <Background {width} {height} />
-  <g id="graph">
+  <g id="graph" role="navigation">
     {#each nodes as node}
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <circle
-        class="node cursor-pointer"
-        r={nodeRadius}
-        fill={`${NODE_COLORS[node.page]}DD`}
-        stroke={"#FFFFFF22"}
-        stroke-width={2}
-        cx={node.x}
-        cy={node.y}
-        on:click|stopPropagation={() => currentPage.set(node.page)}
-        on:keydown|stopPropagation={(e) => e.key === "Enter" && currentPage.set(node.page)}
-      />
-      <text
-        class="cursor-pointer"
-        x={node.x}
-        y={node.y}
-        text-anchor="middle"
-        dominant-baseline="middle"
-        on:click|stopPropagation={() => currentPage.set(node.page)}
-        on:keydown|stopPropagation={(e) => e.key === "Enter" && currentPage.set(node.page)}
-        >{node.label}
-      </text>
+      <g
+        class="node-group cursor-pointer"
+        on:click|stopPropagation={() => onClickNode(node)}
+        on:keydown|stopPropagation={(e) => onKeydownNode(e, node)}
+        role="button"
+        tabindex="0"
+      >
+        <circle
+          class="node"
+          r={nodeRadius}
+          fill={`${NODE_COLORS[node.page]}DD`}
+          stroke={"#FFFFFF22"}
+          stroke-width={2}
+          cx={node.x}
+          cy={node.y}
+        />
+        <text
+          x={node.x}
+          y={node.y}
+          text-anchor="middle"
+          dominant-baseline="middle"
+          >{node.label}
+        </text>
+      </g>
     {/each}
   </g></svg
 >
