@@ -1,5 +1,5 @@
 <script lang="ts">
-import PhotoPage from "./photo/PhotoPage.svelte";
+import PagePhoto from "../components/PagePhoto.svelte";
 import { COLORS_PAGES_BACKGROUND, PAGES } from "./constants";
 import { currentPage } from "./stores";
 import IconCross from "./IconCross.svelte";
@@ -12,7 +12,7 @@ const PADDING_X = 20;
 const PADDING_Y = 15;
 
 function getPageComponent(page: PAGES | null) {
-	if (page === PAGES.PHOTO) return PhotoPage;
+	if (page === PAGES.PHOTO) return PagePhoto;
 	if (page === PAGES.VIDEO) return VideoPage;
 	if (page === PAGES.MUSIC) return MusicPage;
 	return null;
