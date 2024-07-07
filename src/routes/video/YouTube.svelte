@@ -1,11 +1,11 @@
 <script lang="ts">
-  const ASPECT_RATIO = 7 / 4
+const ASPECT_RATIO = 7 / 4;
 
-  // biome-ignore lint/style/useConst: <explanation>
-  export let width = 560;
-  export let videoId: string;
+// biome-ignore lint/style/useConst: <explanation>
+export let width = 560;
+export let videoId: string;
 
-  $: height = width / ASPECT_RATIO;
+$: height = width / ASPECT_RATIO;
 </script>
 
 <iframe

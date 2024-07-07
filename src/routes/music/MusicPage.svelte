@@ -1,5 +1,5 @@
 <script>
-  import CardParto from "./CardParto.svelte";
+import CardParto from "./CardParto.svelte";
 </script>
 
 <div>

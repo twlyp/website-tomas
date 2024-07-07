@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Bandcamp from "./Bandcamp.svelte";
+import Bandcamp from "./Bandcamp.svelte";
 
-  let width: number;
+let width: number;
 </script>
 
 <div bind:clientWidth={width} class="flex flex-col items-center mb-10">

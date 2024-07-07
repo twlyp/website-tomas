@@ -1,16 +1,15 @@
 <script lang="ts">
-  import logo from "$lib/logo_tomas.png";
-  import { COLORS_BACKGROUND_GRADIENT } from "./constants";
+import logo from "$lib/logo_tomas.png";
+import { COLORS_BACKGROUND_GRADIENT } from "./constants";
 
-  export let width: number;
-  export let height: number;
+export let width: number;
+export let height: number;
 
-  const logoPadding = 50;
+const logoPadding = 50;
 
-  const stopOffsets = [0, 25, 50, 75, 100];
+const stopOffsets = [0, 25, 50, 75, 100];
 
-  const getStopIdx = (idx: number) =>
-    idx < 3 ? idx : stopOffsets.length - idx - 1;
+const getStopIdx = (idx: number) => (idx < 3 ? idx : stopOffsets.length - idx - 1);
 </script>
 
 <defs>

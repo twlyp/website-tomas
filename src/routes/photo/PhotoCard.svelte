@@ -1,10 +1,10 @@
 <script lang="ts">
-  export let title: string;
-  export let location: string;
-  export let date: string;
-  export let imageSrc: string;
-  // biome-ignore lint/style/useConst: <explanation>
-  export let imageAlt: string = title;
+export let title: string;
+export let location: string;
+export let date: string;
+export let imageSrc: string;
+// biome-ignore lint/style/useConst: <explanation>
+export let imageAlt: string = title;
 </script>
 
 <div

@@ -40,22 +40,11 @@ export function startSimulation({
 		.alphaTarget(TARGET_ALPHA)
 		.force("charge", d3.forceManyBody())
 		.force("collide", d3.forceCollide(nodeRadius))
-		.force(
-			"boundary",
-			forceBoundary(-halfWidth, -halfHeight, halfWidth, halfHeight).strength(
-				STRENGTH_BOUNDARY,
-			),
-		)
+		.force("boundary", forceBoundary(-halfWidth, -halfHeight, halfWidth, halfHeight).strength(STRENGTH_BOUNDARY))
 		.on("tick", simulationUpdate);
 
 	d3.select(svg as Element).call(
-		d3
-			.drag()
-			.container(svg)
-			.subject(dragsubject)
-			.on("start", dragstarted)
-			.on("drag", dragged)
-			.on("end", dragended),
+		d3.drag().container(svg).subject(dragsubject).on("start", dragstarted).on("drag", dragged).on("end", dragended),
 	);
 
 	function simulationUpdate() {
@@ -92,5 +81,5 @@ export function randomizeNodes(nodes: NodeDatum[], width: number, height: number
 		y: Math.random() * height - height / 2,
 		vx: Math.random() * NODE_INITIAL_VELOCITY,
 		vy: Math.random() * NODE_INITIAL_VELOCITY,
-	  }))
+	}));
 }

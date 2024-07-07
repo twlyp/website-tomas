@@ -1,9 +1,9 @@
 <script lang="ts">
-  import YouTube from "./YouTube.svelte";
-  export let title: string;
-  export let videoId: string;
+import YouTube from "./YouTube.svelte";
+export let title: string;
+export let videoId: string;
 
-  let width: number;
+let width: number;
 </script>
 
 <div

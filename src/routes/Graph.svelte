@@ -1,53 +1,49 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import Background from "./Background.svelte";
-  import { currentPage } from "./stores";
-  import { COLORS_NODE } from "./constants";
-  import {
-    type NodeDatum,
-    randomizeNodes,
-    startSimulation,
-  } from "./dragSimulation";
+import { onMount } from "svelte";
+import Background from "./Background.svelte";
+import { currentPage } from "./stores";
+import { COLORS_NODE } from "./constants";
+import { type NodeDatum, randomizeNodes, startSimulation } from "./dragSimulation";
 
-  export let nodes: NodeDatum[];
+export let nodes: NodeDatum[];
 
-  let svg: SVGSVGElement;
-  export let width: number;
-  export let height: number;
-  const nodeRadius = 70;
+let svg: SVGSVGElement;
+export let width: number;
+export let height: number;
+const nodeRadius = 70;
 
-  // TODO: switch this to getNodes
-  nodes = randomizeNodes(nodes, width, height);
-  $: nodes = nodes.map((d) => Object.create(d));
+// TODO: switch this to getNodes
+nodes = randomizeNodes(nodes, width, height);
+$: nodes = nodes.map((d) => Object.create(d));
 
-  onMount(() =>
-    startSimulation({
-      nodes,
-      nodeRadius,
-      width,
-      height,
-      svg,
-      refreshNodes: () => {
-        nodes = [...nodes];
-      },
-    })
-  );
+onMount(() =>
+	startSimulation({
+		nodes,
+		nodeRadius,
+		width,
+		height,
+		svg,
+		refreshNodes: () => {
+			nodes = [...nodes];
+		},
+	}),
+);
 
-  function onClickBackground() {
-    currentPage.set(null);
-  }
+function onClickBackground() {
+	currentPage.set(null);
+}
 
-  function onKeydownBackground(event: KeyboardEvent) {
-    if (event.key === "Escape") currentPage.set(null);
-  }
+function onKeydownBackground(event: KeyboardEvent) {
+	if (event.key === "Escape") currentPage.set(null);
+}
 
-  function onClickNode(node: NodeDatum) {
-    currentPage.set(node.page);
-  }
+function onClickNode(node: NodeDatum) {
+	currentPage.set(node.page);
+}
 
-  function onKeydownNode(event: KeyboardEvent, node: NodeDatum) {
-    if (event.key === "Enter") currentPage.set(node.page);
-  }
+function onKeydownNode(event: KeyboardEvent, node: NodeDatum) {
+	if (event.key === "Enter") currentPage.set(node.page);
+}
 </script>
 
 <svelte:window
