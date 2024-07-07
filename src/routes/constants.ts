@@ -26,7 +26,7 @@ export const NODES = [
 	{ page: PAGES.BIO, label: "bio" },
 ];
 
-export const BACKGROUND_COLORS = {
+export const PAGES_BACKGROUND_COLORS = {
 	[PAGES.PHOTO]: "#FFFFFFCC",
 	[PAGES.VIDEO]: "#101010CC",
 	[PAGES.MUSIC]: `${NODE_COLORS[PAGES.MUSIC]}AA`,
