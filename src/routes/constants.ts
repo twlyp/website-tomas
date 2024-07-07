@@ -10,7 +10,6 @@ export enum PAGES {
 
 const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
-
 export const NODES = [
 	{ page: PAGES.PHOTO, label: "photo" },
 	{ page: PAGES.VIDEO, label: "video" },
@@ -34,5 +33,11 @@ export const COLORS_PAGES_BACKGROUND = {
 	[PAGES.EXHIBITIONS]: `${COLORS_NODE[PAGES.EXHIBITIONS]}AA`,
 	[PAGES.BIO]: `${COLORS_NODE[PAGES.BIO]}AA`,
 };
+
+export const COLORS_BACKGROUND_GRADIENT = [
+	{ color: "#FF7F50", opacity: 0.7 },
+	{ color: "#FF4500", opacity: 0.6 },
+	{ color: "#FF1493", opacity: 0.5 },
+];
 
 export const NODE_INITIAL_VELOCITY = 50;

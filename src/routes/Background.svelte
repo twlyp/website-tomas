@@ -1,10 +1,16 @@
 <script lang="ts">
   import logo from "$lib/logo_tomas.png";
+  import { COLORS_BACKGROUND_GRADIENT } from "./constants";
 
   export let width: number;
   export let height: number;
 
   const logoPadding = 50;
+
+  const stopOffsets = [0, 25, 50, 75, 100];
+
+  const getStopIdx = (idx: number) =>
+    idx < 3 ? idx : stopOffsets.length - idx - 1;
 </script>
 
 <defs>
@@ -16,11 +22,13 @@
     y2="100%"
     spreadMethod="reflect"
   >
-    <stop offset="0%" style="stop-color:#FF7F50;stop-opacity:0.7" />
-    <stop offset="25%" style="stop-color:#FF4500;stop-opacity:0.6" />
-    <stop offset="50%" style="stop-color:#FF1493;stop-opacity:0.5" />
-    <stop offset="75%" style="stop-color:#FF4500;stop-opacity:0.6" />
-    <stop offset="100%" style="stop-color:#FF7F50;stop-opacity:0.7" />
+    {#each stopOffsets as offset, idx}
+      <stop
+        offset="{offset}%"
+        style="stop-color:{COLORS_BACKGROUND_GRADIENT[getStopIdx(idx)].color};
+          stop-opacity:{COLORS_BACKGROUND_GRADIENT[getStopIdx(idx)].opacity}"
+      />
+    {/each}
     <animate
       attributeName="x1"
       values="0%;100%"

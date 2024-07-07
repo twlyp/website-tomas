@@ -16,6 +16,7 @@
   export let height: number;
   const nodeRadius = 70;
 
+  // TODO: switch this to getNodes
   nodes = randomizeNodes(nodes, width, height);
   $: nodes = nodes.map((d) => Object.create(d));
 
