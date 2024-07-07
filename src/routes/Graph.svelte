@@ -3,23 +3,20 @@
   import Background from "./Background.svelte";
   import { currentPage } from "./stores";
   import { NODE_COLORS } from "./constants";
-  import { type NodeDatum, startSimulation } from "./dragSimulation";
+  import {
+    type NodeDatum,
+    randomizeNodes,
+    startSimulation,
+  } from "./dragSimulation";
 
   export let nodes: NodeDatum[];
 
   let svg: SVGSVGElement;
-  export let width : number;
-  export let height : number;
+  export let width: number;
+  export let height: number;
   const nodeRadius = 70;
 
-  const INITIAL_VELOCITY = 50;
-  nodes = nodes.map((d) => ({
-    ...d,
-    x: Math.random() * width - width / 2,
-    y: Math.random() * height - height / 2,
-    vx: Math.random() * INITIAL_VELOCITY,
-    vy: Math.random() * INITIAL_VELOCITY,
-  }));
+  nodes = randomizeNodes(nodes, width, height);
   $: nodes = nodes.map((d) => Object.create(d));
 
   onMount(() =>

@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import type { PAGES } from "./constants";
+import { NODE_INITIAL_VELOCITY, type PAGES } from "./constants";
 // @ts-expect-error - d3-force-boundary is not typed
 import forceBoundary from "d3-force-boundary";
 
@@ -83,4 +83,14 @@ export function startSimulation({
 		event.subject.fx = null;
 		event.subject.fy = null;
 	}
+}
+
+export function randomizeNodes(nodes: NodeDatum[], width: number, height: number) {
+	return nodes.map((d) => ({
+		...d,
+		x: Math.random() * width - width / 2,
+		y: Math.random() * height - height / 2,
+		vx: Math.random() * NODE_INITIAL_VELOCITY,
+		vy: Math.random() * NODE_INITIAL_VELOCITY,
+	  }))
 }
