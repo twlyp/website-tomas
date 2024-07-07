@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { ComponentProps } from "svelte";
   // biome-ignore lint/style/useImportType: it's used as component
-  import PhotoCard from "../../routes/photo/PhotoCard.svelte";
+  import CardPhoto from "./CardPhoto.svelte";
   import { swipe, type SwipeCustomEvent } from "svelte-gestures";
 
-  export let photos: Array<ComponentProps<PhotoCard>>;
+  export let photos: Array<ComponentProps<CardPhoto>>;
   let currentPhotoIdx = Math.floor(Math.random() * photos.length);
 
   function mod(n: number, m: number) {
@@ -47,7 +47,7 @@
   tabindex="0"
 >
   {#each photos as photo, idx}
-    <PhotoCard
+    <CardPhoto
       class="absolute top-0 transition-transform duration-500 ease-in-out"
       style="left: {idx * 100}vw;
              transform: translateX({-currentPhotoIdx * 100}vw);
