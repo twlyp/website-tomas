@@ -3,6 +3,11 @@
   import OpenPage from "./OpenPage.svelte";
   import { COLORS_BACKGROUND_GRADIENT, NODES } from "./constants";
   import { viewportWidth, viewportHeight } from "./stores";
+  import { opacityToHex } from "./utils";
+
+  const backgroundColor =
+    COLORS_BACKGROUND_GRADIENT[1].color +
+    opacityToHex(COLORS_BACKGROUND_GRADIENT[1].opacity);
 </script>
 
 <svelte:window
@@ -14,10 +19,7 @@
   {#if $viewportWidth && $viewportHeight}
     <Graph width={$viewportWidth} height={$viewportHeight} nodes={NODES} />
   {:else}
-    <div
-      class="w-full h-full"
-      style="background-color: {COLORS_BACKGROUND_GRADIENT[1].color}"
-    />
+    <div class="w-full h-full" style="background-color: {backgroundColor};" />
   {/if}
 </div>
 
