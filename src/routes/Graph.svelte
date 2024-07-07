@@ -8,10 +8,8 @@
   export let nodes: NodeDatum[];
 
   let svg: SVGSVGElement;
-  // biome-ignore lint/style/useConst: <explanation>
-  let width = 500;
-  // biome-ignore lint/style/useConst: <explanation>
-  let height = 600;
+  export let width : number;
+  export let height : number;
   const nodeRadius = 70;
 
   const INITIAL_VELOCITY = 50;
