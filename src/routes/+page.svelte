@@ -1,16 +1,23 @@
 <script lang="ts">
   import Graph from "./Graph.svelte";
   import OpenPage from "./OpenPage.svelte";
-  import { NODES } from "./constants";
-  import {viewportWidth, viewportHeight} from './stores';
-
+  import { COLORS_BACKGROUND_GRADIENT, NODES } from "./constants";
+  import { viewportWidth, viewportHeight } from "./stores";
 </script>
 
-<svelte:window bind:innerWidth={$viewportWidth} bind:innerHeight={$viewportHeight} />
+<svelte:window
+  bind:innerWidth={$viewportWidth}
+  bind:innerHeight={$viewportHeight}
+/>
 
 <div class="absolute top-0 left-0 w-screen h-screen">
   {#if $viewportWidth && $viewportHeight}
     <Graph width={$viewportWidth} height={$viewportHeight} nodes={NODES} />
+  {:else}
+    <div
+      class="w-full h-full"
+      style="background-color: {COLORS_BACKGROUND_GRADIENT[1].color}"
+    />
   {/if}
 </div>
 
