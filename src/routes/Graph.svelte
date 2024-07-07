@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import Background from "./Background.svelte";
   import { currentPage } from "./stores";
-  import { NODE_COLORS } from "./constants";
+  import { COLORS_NODE } from "./constants";
   import {
     type NodeDatum,
     randomizeNodes,
@@ -75,7 +75,7 @@
         <circle
           class="node"
           r={nodeRadius}
-          fill={`${NODE_COLORS[node.page]}DD`}
+          fill={`${COLORS_NODE[node.page]}DD`}
           stroke={"#FFFFFF22"}
           stroke-width={2}
           cx={node.x}

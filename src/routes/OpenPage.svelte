@@ -1,6 +1,6 @@
 <script lang="ts">
   import PhotoPage from "./photo/PhotoPage.svelte";
-  import { PAGES_BACKGROUND_COLORS, PAGES } from "./constants";
+  import { COLORS_PAGES_BACKGROUND, PAGES } from "./constants";
   import { currentPage } from "./stores";
   import IconCross from "./IconCross.svelte";
   import VideoPage from "./video/VideoPage.svelte";
@@ -19,7 +19,7 @@
   }
 
   $: Content = getPageComponent($currentPage);
-  $: backgroundColor = $currentPage ? PAGES_BACKGROUND_COLORS[$currentPage] : "none";
+  $: backgroundColor = $currentPage ? COLORS_PAGES_BACKGROUND[$currentPage] : "none";
 
   let width: number;
   let height: number;
