@@ -15,7 +15,7 @@
   bind:innerHeight={$viewportHeight}
 />
 
-<div class="absolute top-0 left-0 w-screen h-screen">
+<div class="absolute top-0 left-0 w-screen h-screen overflow-hidden">
   {#if $viewportWidth && $viewportHeight}
     <Graph width={$viewportWidth} height={$viewportHeight} nodes={NODES} />
   {:else}
