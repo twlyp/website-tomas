@@ -1,28 +1,30 @@
 <script lang="ts">
-import PagePhoto from "../components/PagePhoto.svelte";
-import { COLORS_PAGES_BACKGROUND, PAGES } from "./constants";
-import { currentPage } from "./stores";
-import IconCross from "./IconCross.svelte";
-import VideoPage from "./video/VideoPage.svelte";
-import MusicPage from "./music/MusicPage.svelte";
-import { scale } from "svelte/transition";
-import { quadInOut } from "svelte/easing";
+  import PagePhoto from "../components/PagePhoto.svelte";
+  import { COLORS_PAGES_BACKGROUND, PAGES } from "./constants";
+  import { currentPage } from "./stores";
+  import IconCross from "./IconCross.svelte";
+  import VideoPage from "./video/VideoPage.svelte";
+  import MusicPage from "./music/MusicPage.svelte";
+  import { scale } from "svelte/transition";
+  import { quadInOut } from "svelte/easing";
 
-const PADDING_X = 20;
-const PADDING_Y = 15;
+  const PADDING_X = 20;
+  const PADDING_Y = 15;
 
-function getPageComponent(page: PAGES | null) {
-	if (page === PAGES.PHOTO) return PagePhoto;
-	if (page === PAGES.VIDEO) return VideoPage;
-	if (page === PAGES.MUSIC) return MusicPage;
-	return null;
-}
+  function getPageComponent(page: PAGES | null) {
+    if (page === PAGES.PHOTO) return PagePhoto;
+    if (page === PAGES.VIDEO) return VideoPage;
+    if (page === PAGES.MUSIC) return MusicPage;
+    return null;
+  }
 
-$: Content = getPageComponent($currentPage);
-$: backgroundColor = $currentPage ? COLORS_PAGES_BACKGROUND[$currentPage] : "none";
+  $: Content = getPageComponent($currentPage);
+  $: backgroundColor = $currentPage
+    ? COLORS_PAGES_BACKGROUND[$currentPage]
+    : "none";
 
-let width: number;
-let height: number;
+  let width: number;
+  let height: number;
 </script>
 
 <svelte:window bind:innerWidth={width} bind:innerHeight={height} />
@@ -43,7 +45,7 @@ let height: number;
     <svelte:component this={Content} />
 
     <button
-      class="absolute top-2 right-2 bg-none rounded-full"
+      class="fixed top-5 right-7 bg-none rounded-full"
       on:click={() => currentPage.set(null)}
     >
       <IconCross />
