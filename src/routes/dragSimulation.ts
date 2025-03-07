@@ -10,7 +10,7 @@ export interface NodeDatum extends d3.SimulationNodeDatum {
 export type LinkDatum = d3.SimulationLinkDatum<NodeDatum>;
 type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>;
 
-const STRENGTH_BOUNDARY = 0.001;
+const STRENGTH_BOUNDARY = 0.002;
 const DECAY_ALPHA = 0.02;
 const DECAY_VELOCITY = 0.02;
 const TARGET_ALPHA = 0.2;
