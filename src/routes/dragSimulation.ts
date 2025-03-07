@@ -44,7 +44,7 @@ export function startSimulation({
 		.on("tick", simulationUpdate);
 
 	d3.select(svg as Element).call(
-		d3.drag().container(svg).subject(dragsubject).on("start", dragstarted).on("drag", dragged).on("end", dragended),
+		d3.drag().container(svg).subject(dragSubject).on("start", dragStarted).on("drag", dragged).on("end", dragEnded),
 	);
 
 	function simulationUpdate() {
@@ -52,11 +52,11 @@ export function startSimulation({
 		refreshNodes(nodes);
 	}
 
-	function dragsubject(event: DragEvent) {
+	function dragSubject(event: DragEvent) {
 		return simulation.find(event.x, event.y, nodeRadius);
 	}
 
-	function dragstarted(event: DragEvent) {
+	function dragStarted(event: DragEvent) {
 		if (!event.active) simulation.alphaTarget(0.3).restart();
 		event.subject.fx = event.subject.x;
 		event.subject.fy = event.subject.y;
@@ -67,7 +67,7 @@ export function startSimulation({
 		event.subject.fy = event.y;
 	}
 
-	function dragended(event: DragEvent) {
+	function dragEnded(event: DragEvent) {
 		if (!event.active) simulation.alphaTarget(0);
 		event.subject.fx = null;
 		event.subject.fy = null;
