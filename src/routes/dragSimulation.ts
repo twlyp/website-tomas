@@ -2,6 +2,7 @@ import * as d3 from "d3";
 import { NODE_INITIAL_VELOCITY, type PAGES } from "./constants";
 // @ts-expect-error - d3-force-boundary is not typed
 import forceBoundary from "d3-force-boundary";
+import { bindToInterval } from "./utils";
 
 export interface NodeDatum extends d3.SimulationNodeDatum {
 	page: PAGES;
@@ -63,8 +64,8 @@ export function startSimulation({
 	}
 
 	function dragged(event: DragEvent) {
-		event.subject.fx = event.x;
-		event.subject.fy = event.y;
+		event.subject.fx = bindToInterval(-halfWidth, halfWidth, event.x);
+		event.subject.fy = bindToInterval(-halfHeight, halfHeight, event.y);
 	}
 
 	function dragEnded(event: DragEvent) {
