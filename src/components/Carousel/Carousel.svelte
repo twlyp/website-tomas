@@ -2,7 +2,6 @@
   import type { ComponentProps } from "svelte";
   // biome-ignore lint/style/useImportType: it's used as component
   import CardPhoto from "./CardPhoto.svelte";
-  import { swipe, type SwipeCustomEvent } from "svelte-gestures";
 
   export let photos: Array<ComponentProps<CardPhoto>>;
   let currentPhotoIdx = Math.floor(Math.random() * photos.length);
@@ -23,14 +22,6 @@
     }
   }
 
-  function onSwipe(ev: SwipeCustomEvent) {
-    if (ev.detail.direction === "left") {
-      changePhoto(+1);
-    } else if (ev.detail.direction === "right") {
-      changePhoto(-1);
-    }
-  }
-
   function focus(element: HTMLElement) {
     element.focus();
   }
@@ -39,10 +30,8 @@
 <div
   class="w-full h-full"
   use:focus
-  use:swipe
   on:click|stopPropagation={() => changePhoto(+1)}
   on:keydown={onKeydown}
-  on:swipe={onSwipe}
   role="button"
   tabindex="0"
 >
