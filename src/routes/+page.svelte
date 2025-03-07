@@ -21,6 +21,10 @@
   {:else}
     <div class="w-full h-full" style="background-color: {backgroundColor};" />
   {/if}
+
+  <a href="mailto:tomeyzaguirre@gmail.com" class="absolute bottom-3 right-5 text-s">
+    contact me
+  </a>
 </div>
 
 <OpenPage />
