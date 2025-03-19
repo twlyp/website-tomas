@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Background from "./Background.svelte";
   import Graph from "./Graph.svelte";
   import OpenPage from "./OpenPage.svelte";
   import { COLORS_BACKGROUND_GRADIENT, NODES } from "./constants";
@@ -16,13 +17,21 @@
 />
 
 <div class="absolute top-0 left-0 w-screen h-screen overflow-hidden">
+  <Background />
+
   {#if $viewportWidth && $viewportHeight}
     <Graph width={$viewportWidth} height={$viewportHeight} nodes={NODES} />
   {:else}
-    <div class="w-full h-full" style="background-color: {backgroundColor};" />
+    <div
+      class="w-full h-full"
+      style="background-color: {backgroundColor};"
+    ></div>
   {/if}
 
-  <a href="mailto:tomeyzaguirre@gmail.com" class="absolute bottom-3 right-5 text-s">
+  <a
+    href="mailto:tomeyzaguirre@gmail.com"
+    class="absolute bottom-3 right-5 text-s"
+  >
     contact me
   </a>
 </div>

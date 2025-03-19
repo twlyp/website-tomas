@@ -62,8 +62,8 @@
   {width}
   {height}
   viewBox="{-width / 2} {-height / 2} {width} {height}"
+  class="absolute top-0 left-0"
 >
-  <Background {width} {height} />
   <g id="graph" role="navigation">
     {#each nodes as node}
       <g
