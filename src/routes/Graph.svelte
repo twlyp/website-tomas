@@ -1,8 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import Background from "./Background.svelte";
   import { currentPage } from "./stores";
-  import { COLORS_NODE, NODES } from "./constants";
+  import { COLORS_NODE } from "./constants";
   import {
     type NodeDatum,
     randomizeNodes,
