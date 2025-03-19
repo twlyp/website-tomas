@@ -1,11 +1,13 @@
 <script lang="ts">
+  interface Props {
+    width?: number;
+    videoId: string;
+  }
+  
   const ASPECT_RATIO = 7 / 4;
 
-  // biome-ignore lint/style/useConst: this is a prop
-  export let width = 560;
-  export let videoId: string;
-
-  $: height = width / ASPECT_RATIO;
+  const { width = 560, videoId }: Props = $props();
+  const height = $derived(width / ASPECT_RATIO);
 </script>
 
 <iframe

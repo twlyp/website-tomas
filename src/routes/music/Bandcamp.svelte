@@ -1,7 +1,12 @@
 <script lang="ts">
-// biome-ignore lint/style/useConst: <explanation>
-export let width = 350;
-$: height = width * 1.5;
+  interface Props {
+    width?: number;
+  }
+
+  const ASPECT_RATIO = 2 / 3
+
+  const { width = 350 }: Props = $props();
+  const height = $derived(width / ASPECT_RATIO);
 </script>
 
 <iframe

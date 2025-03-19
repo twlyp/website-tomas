@@ -1,56 +1,68 @@
 <script lang="ts">
-import { onMount } from "svelte";
-import Background from "./Background.svelte";
-import { currentPage } from "./stores";
-import { COLORS_NODE } from "./constants";
-import { type NodeDatum, randomizeNodes, startSimulation } from "./dragSimulation";
+  import { onMount } from "svelte";
+  import Background from "./Background.svelte";
+  import { currentPage } from "./stores";
+  import { COLORS_NODE } from "./constants";
+  import {
+    type NodeDatum,
+    randomizeNodes,
+    startSimulation,
+  } from "./dragSimulation";
 
-export let nodes: NodeDatum[];
+  interface Props {
+    nodes: NodeDatum[];
+    width: number;
+    height: number;
+  }
 
-let svg: SVGSVGElement;
-export let width: number;
-export let height: number;
-const nodeRadius = 70;
+  let { nodes, width, height }: Props = $props();
 
-// TODO: switch this to getNodes
-nodes = randomizeNodes(nodes, width, height);
-$: nodes = nodes.map((d) => Object.create(d));
+  let svg: SVGSVGElement;
+  const nodeRadius = 70;
 
-onMount(() =>
-	startSimulation({
-		nodes,
-		nodeRadius,
-		width,
-		height,
-		svg,
-		refreshNodes: () => {
-			nodes = [...nodes];
-		},
-	}),
-);
+  // TODO: switch this to $state
+  nodes = randomizeNodes(nodes, width, height);
+  $effect(() => {
+    nodes = nodes.map((d) => Object.create(d));
+  });
 
-function onClickBackground() {
-	currentPage.set(null);
-}
+  onMount(() =>
+    startSimulation({
+      nodes,
+      nodeRadius,
+      width,
+      height,
+      svg,
+      refreshNodes: () => {
+        nodes = [...nodes];
+      },
+    })
+  );
 
-function onKeydownBackground(event: KeyboardEvent) {
-	if (event.key === "Escape") currentPage.set(null);
-}
+  function onClickBackground() {
+    currentPage.set(null);
+  }
 
-function onClickNode(node: NodeDatum) {
-	currentPage.set(node.page);
-}
+  function onKeydownBackground(event: KeyboardEvent) {
+    if (event.key === "Escape") currentPage.set(null);
+  }
 
-function onKeydownNode(event: KeyboardEvent, node: NodeDatum) {
-	if (event.key === "Enter") currentPage.set(node.page);
-}
+  function onClickNode(event: MouseEvent, node: NodeDatum) {
+    event.stopPropagation();
+    currentPage.set(node.page);
+  }
+
+  function onKeydownNode(event: KeyboardEvent, node: NodeDatum) {
+    event.stopPropagation();
+    if (event.key === "Enter") currentPage.set(node.page);
+  }
 </script>
 
 <svelte:window
   bind:innerWidth={width}
   bind:innerHeight={height}
-  on:click={onClickBackground}
-  on:keydown|capture={onKeydownBackground}
+  onclick={onClickBackground}
+  onkeydowncapture={onKeydownBackground}
 />
 
 <svg
@@ -64,8 +76,8 @@ function onKeydownNode(event: KeyboardEvent, node: NodeDatum) {
     {#each nodes as node}
       <g
         class="node-group cursor-pointer"
-        on:click|stopPropagation={() => onClickNode(node)}
-        on:keydown|stopPropagation={(e) => onKeydownNode(e, node)}
+        onclick={(e) => onClickNode(e, node)}
+        onkeydown={(e) => onKeydownNode(e, node)}
         role="button"
         tabindex="0"
       >
