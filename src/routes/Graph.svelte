@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import Background from "./Background.svelte";
   import { currentPage } from "./stores";
-  import { COLORS_NODE } from "./constants";
+  import { COLORS_NODE, NODES } from "./constants";
   import {
     type NodeDatum,
     randomizeNodes,
@@ -15,16 +15,12 @@
     height: number;
   }
 
-  let { nodes, width, height }: Props = $props();
+  const {nodes: inputNodes, width, height }: Props = $props();
 
   let svg: SVGSVGElement;
   const nodeRadius = 70;
 
-  // TODO: switch this to $state
-  nodes = randomizeNodes(nodes, width, height);
-  $effect(() => {
-    nodes = nodes.map((d) => Object.create(d));
-  });
+  let nodes = $state(randomizeNodes(inputNodes, width, height));
 
   onMount(() =>
     startSimulation({
@@ -59,8 +55,6 @@
 </script>
 
 <svelte:window
-  bind:innerWidth={width}
-  bind:innerHeight={height}
   onclick={onClickBackground}
   onkeydowncapture={onKeydownBackground}
 />
