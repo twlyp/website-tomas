@@ -1,23 +1,30 @@
-<script>
+<script lang="ts">
   import "../app.css";
   import Background from "./Background.svelte";
   import BackgroundLogo from "./BackgroundLogo.svelte";
   import Graph from "./Graph.svelte";
   import { NODES } from "./constants";
-  import { viewportWidth, viewportHeight } from "./stores";
+
+  // biome-ignore lint/style/useConst: bound variable
+  let width: number = $state(0);
+  // biome-ignore lint/style/useConst: bound variable
+  let height: number = $state(0);
+
+  // biome-ignore lint/style/useConst: props
+  let {children} = $props()
 </script>
 
 <svelte:window
-  bind:innerWidth={$viewportWidth}
-  bind:innerHeight={$viewportHeight}
+  bind:innerWidth={width}
+  bind:innerHeight={height}
 />
 
 <div class="absolute top-0 left-0 w-screen h-screen overflow-hidden">
   <Background />
   <BackgroundLogo />
 
-  {#if $viewportWidth && $viewportHeight}
-    <Graph width={$viewportWidth} height={$viewportHeight} nodes={NODES} />
+  {#if width && height}
+    <Graph width={width} height={height} nodes={NODES} />
   {/if}
 
   <a
@@ -28,6 +35,6 @@
   </a>
 </div>
 
-<slot></slot>
+{@render children()}
 
 <style></style>
