@@ -33,7 +33,7 @@
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div
-    class="absolute overflow-auto no-scrollbar p-5 px-10 rounded-sm"
+    class="absolute overflow-auto no-scrollbar p-5 px-10 rounded-xs"
     style="background-color: {backgroundColor};
          width: {width - 2 * PADDING_X}px;
          height: {height - 2 * PADDING_Y}px;

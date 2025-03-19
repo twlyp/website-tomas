@@ -16,7 +16,7 @@ export let imageAlt: string = title;
     <h4>{location}, {date}</h4>
   </div>
   <img
-    class="max-h-full max-w-full flex-grow object-contain"
+    class="max-h-full max-w-full grow object-contain"
     src={imageSrc}
     alt={imageAlt}
   />
