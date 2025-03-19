@@ -1,9 +1,14 @@
 <script lang="ts">
   import YouTube from "./YouTube.svelte";
-  export let title: string;
-  export let videoId: string;
-  export let parentWidth: number;
-  export let parentHeight: number;
+  interface Props {
+    title: string;
+    videoId: string;
+    parentWidth: number;
+    parentHeight: number;
+  }
+
+  // biome-ignore lint/style/useConst: props
+  let { title, videoId, parentWidth, parentHeight }: Props = $props();
 </script>
 
 <div

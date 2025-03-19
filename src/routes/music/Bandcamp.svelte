@@ -5,7 +5,8 @@
 
   const ASPECT_RATIO = 2 / 3
 
-  const { width = 350 }: Props = $props();
+  // biome-ignore lint/style/useConst: props
+  let { width = 350 }: Props = $props();
   const height = $derived(width / ASPECT_RATIO);
 </script>
 

@@ -6,7 +6,8 @@
   
   const ASPECT_RATIO = 7 / 4;
 
-  const { width = 560, videoId }: Props = $props();
+  // biome-ignore lint/style/useConst: props
+  let { width = 560, videoId }: Props = $props();
   const height = $derived(width / ASPECT_RATIO);
 </script>
 
