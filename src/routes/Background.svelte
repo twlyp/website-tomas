@@ -1,7 +1,5 @@
 <script lang="ts">
   import { COLORS_BACKGROUND_GRADIENT } from "./constants";
-  import { viewportWidth, viewportHeight } from "./stores";
-
 
   const stopOffsets = [0, 25, 50, 75, 100];
 
@@ -9,13 +7,7 @@
     idx < 3 ? idx : stopOffsets.length - idx - 1;
 </script>
 
-<svg
-  class="absolute top-0 left-0"
-  width={$viewportWidth}
-  height={$viewportHeight}
-  viewBox="{-$viewportWidth / 2} {-$viewportHeight /
-    2} {$viewportWidth} {$viewportHeight}"
->
+<svg class="absolute top-0 left-0 w-screen h-screen">
   <defs>
     <linearGradient
       id="sunsetGradient"
@@ -59,11 +51,5 @@
     </linearGradient>
   </defs>
 
-  <rect
-    x={-$viewportWidth / 2}
-    y={-$viewportHeight / 2}
-    width={$viewportWidth}
-    height={$viewportHeight}
-    fill="url(#sunsetGradient)"
-  />
+  <rect x="0" y="0" width="100%" height="100%" fill="url(#sunsetGradient)" />
 </svg>
