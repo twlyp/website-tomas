@@ -7,6 +7,7 @@ import { bindToInterval } from "./utils";
 export interface NodeDatum extends d3.SimulationNodeDatum {
 	page: PAGES;
 	label: string;
+	radius: number;
 }
 export type LinkDatum = d3.SimulationLinkDatum<NodeDatum>;
 type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>;
@@ -16,21 +17,15 @@ const DECAY_ALPHA = 0.02;
 const DECAY_VELOCITY = 0.02;
 const TARGET_ALPHA = 0.2;
 
-export function startSimulation({
-	nodes,
-	nodeRadius,
-	width,
-	height,
-	svg,
-	refreshNodes,
-}: {
+interface StartSimulationParams {
 	nodes: NodeDatum[];
-	nodeRadius: number;
 	width: number;
 	height: number;
 	svg: SVGSVGElement;
 	refreshNodes: (nodes: NodeDatum[]) => void;
-}) {
+}
+
+export function startSimulation({ nodes, width, height, svg, refreshNodes }: StartSimulationParams) {
 	const halfWidth = width / 2;
 	const halfHeight = height / 2;
 
@@ -40,7 +35,10 @@ export function startSimulation({
 		.velocityDecay(DECAY_VELOCITY)
 		.alphaTarget(TARGET_ALPHA)
 		.force("charge", d3.forceManyBody())
-		.force("collide", d3.forceCollide(nodeRadius))
+		.force(
+			"collide",
+			d3.forceCollide((d) => d.radius),
+		)
 		.force("boundary", forceBoundary(-halfWidth, -halfHeight, halfWidth, halfHeight).strength(STRENGTH_BOUNDARY))
 		.on("tick", simulationUpdate);
 
@@ -54,7 +52,7 @@ export function startSimulation({
 	}
 
 	function dragSubject(event: DragEvent) {
-		return simulation.find(event.x, event.y, nodeRadius);
+		return simulation.find(event.x, event.y);
 	}
 
 	function dragStarted(event: DragEvent) {
@@ -75,7 +73,7 @@ export function startSimulation({
 	}
 }
 
-export function randomizeNodes(nodes: NodeDatum[], width: number, height: number) {
+export function randomizeNodes(nodes: NodeDatum[], width: number, height: number): NodeDatum[] {
 	return nodes.map((d) => ({
 		...d,
 		x: Math.random() * width - width / 2,

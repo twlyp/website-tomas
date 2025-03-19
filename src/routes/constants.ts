@@ -11,11 +11,11 @@ export enum PAGES {
 const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
 export const NODES = [
-	{ page: PAGES.PHOTO, label: "photo" },
-	{ page: PAGES.VIDEO, label: "video" },
-	{ page: PAGES.EXHIBITIONS, label: "exhibitions" },
-	{ page: PAGES.MUSIC, label: "music" },
-	{ page: PAGES.BIO, label: "bio" },
+	{ page: PAGES.PHOTO, label: "photo", radius: 100 },
+	{ page: PAGES.VIDEO, label: "video", radius: 80 },
+	{ page: PAGES.EXHIBITIONS, label: "exhibitions", radius: 70 },
+	{ page: PAGES.MUSIC, label: "music", radius: 60 },
+	{ page: PAGES.BIO, label: "bio", radius: 50 },
 ];
 
 export const COLORS_NODE = {

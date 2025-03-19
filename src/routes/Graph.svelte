@@ -15,17 +15,15 @@
     height: number;
   }
 
-  const {nodes: inputNodes, width, height }: Props = $props();
+  const { nodes: inputNodes, width, height }: Props = $props();
 
   let svg: SVGSVGElement;
-  const nodeRadius = 70;
 
   let nodes = $state(randomizeNodes(inputNodes, width, height));
 
   onMount(() =>
     startSimulation({
       nodes,
-      nodeRadius,
       width,
       height,
       svg,
@@ -77,7 +75,7 @@
       >
         <circle
           class="node"
-          r={nodeRadius}
+          r={node.radius}
           fill={`${COLORS_NODE[node.page]}DD`}
           stroke={"#FFFFFF22"}
           stroke-width={2}
