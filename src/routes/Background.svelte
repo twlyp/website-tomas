@@ -1,9 +1,7 @@
 <script lang="ts">
-  import logo from "$lib/logo_tomas.png";
   import { COLORS_BACKGROUND_GRADIENT } from "./constants";
   import { viewportWidth, viewportHeight } from "./stores";
 
-  const logoPadding = 50;
 
   const stopOffsets = [0, 25, 50, 75, 100];
 
@@ -67,14 +65,5 @@
     width={$viewportWidth}
     height={$viewportHeight}
     fill="url(#sunsetGradient)"
-  />
-
-  <image
-    href={logo}
-    x={-$viewportWidth / 2 + logoPadding / 2}
-    y={-$viewportHeight / 2 + logoPadding / 2}
-    width={$viewportWidth - logoPadding}
-    height={$viewportHeight - logoPadding}
-    opacity={0.6}
   />
 </svg>

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Background from "./Background.svelte";
+  import BackgroundLogo from "./BackgroundLogo.svelte";
   import Graph from "./Graph.svelte";
   import OpenPage from "./OpenPage.svelte";
   import { COLORS_BACKGROUND_GRADIENT, NODES } from "./constants";
@@ -18,6 +19,7 @@
 
 <div class="absolute top-0 left-0 w-screen h-screen overflow-hidden">
   <Background />
+  <BackgroundLogo />
 
   {#if $viewportWidth && $viewportHeight}
     <Graph width={$viewportWidth} height={$viewportHeight} nodes={NODES} />
