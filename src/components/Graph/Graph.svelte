@@ -6,7 +6,6 @@
     randomizeNodes,
     startSimulation,
   } from "./dragSimulation";
-  import { goto } from "$app/navigation";
 
   interface Props {
     nodes: NodeDatum[];
@@ -31,24 +30,7 @@
       },
     })
   );
-
-
-  function onKeydownBackground(event: KeyboardEvent) {
-    if (event.key === "Escape") goto("/");
-  }
-
-  function onClickNode(event: MouseEvent, node: NodeDatum) {
-    goto(`/${node.page}`);
-  }
-
-  function onKeydownNode(event: KeyboardEvent, node: NodeDatum) {
-    if (event.key === "Enter") goto(`/${node.page}`);
-  }
 </script>
-
-<svelte:window
-  onkeydowncapture={onKeydownBackground}
-/>
 
 <svg
   bind:this={svg}
@@ -59,30 +41,26 @@
 >
   <g id="graph" role="navigation">
     {#each nodes as node}
-      <g
-        class="node-group cursor-pointer"
-        onclick={(e) => onClickNode(e, node)}
-        onkeydown={(e) => onKeydownNode(e, node)}
-        role="button"
-        tabindex="0"
-      >
-        <circle
-          class="node"
-          r={node.radius}
-          fill={`${COLORS_NODE[node.page]}DD`}
-          stroke={"#FFFFFF22"}
-          stroke-width={2}
-          cx={node.x}
-          cy={node.y}
-        />
-        <text
-          x={node.x}
-          y={node.y}
-          text-anchor="middle"
-          dominant-baseline="middle"
-          >{node.label}
-        </text>
-      </g>
+      <a href={`/${node.page}`}>
+        <g class="node-group">
+          <circle
+            class="node"
+            r={node.radius}
+            fill={`${COLORS_NODE[node.page]}DD`}
+            stroke={"#FFFFFF22"}
+            stroke-width={2}
+            cx={node.x}
+            cy={node.y}
+          />
+          <text
+            x={node.x}
+            y={node.y}
+            text-anchor="middle"
+            dominant-baseline="middle"
+            >{node.label}
+          </text>
+        </g>
+      </a>
     {/each}
   </g></svg
 >
