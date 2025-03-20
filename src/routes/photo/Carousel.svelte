@@ -1,13 +1,14 @@
 <script lang="ts">
   import type { ComponentProps } from "svelte";
-  import CardPhoto from "./CardPhoto.svelte";
+  import CardPhoto, { type Props as CardPhotoProps } from "./CardPhoto.svelte";
+  import { mod, randomInt } from "$utils";
 
-  export let photos: Array<ComponentProps<CardPhoto>>;
-  let currentPhotoIdx = Math.floor(Math.random() * photos.length);
-
-  function mod(n: number, m: number) {
-    return ((n % m) + m) % m;
+  interface Props {
+    photos: CardPhotoProps[];
   }
+  let { photos }: Props = $props();
+
+  let currentPhotoIdx = $state(randomInt(photos.length - 1));
 
   function changePhoto(delta: number) {
     currentPhotoIdx = mod(currentPhotoIdx + delta, photos.length);
@@ -27,10 +28,10 @@
 </script>
 
 <div
-  class="w-full h-full"
+  class="relative w-full h-full"
   use:focus
-  on:click|stopPropagation={() => changePhoto(+1)}
-  on:keydown={onKeydown}
+  onclick={() => changePhoto(+1)}
+  onkeydown={onKeydown}
   role="button"
   tabindex="0"
 >

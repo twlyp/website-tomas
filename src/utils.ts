@@ -10,3 +10,11 @@ export function opacityToHex(opacity: number) {
 export function bindToInterval(min: number, max: number, value: number) {
 	return Math.min(Math.max(min, value), max);
 }
+
+export function randomInt(max: number, min = 0): number {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+export function mod(n: number, m: number) {
+	return ((n % m) + m) % m;
+}
