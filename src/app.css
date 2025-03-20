@@ -29,3 +29,19 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+@font-face {
+  font-family: "Tomeyza";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Tomeyza.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Tomasito";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/Tomasito.otf") format("opentype");
+}
