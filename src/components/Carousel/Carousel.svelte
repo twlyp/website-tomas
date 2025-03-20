@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { ComponentProps } from "svelte";
-  // biome-ignore lint/style/useImportType: it's used as component
   import CardPhoto from "./CardPhoto.svelte";
 
   export let photos: Array<ComponentProps<CardPhoto>>;

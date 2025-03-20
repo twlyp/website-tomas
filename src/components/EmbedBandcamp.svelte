@@ -4,7 +4,6 @@
     height?: number;
   }
 
-  // biome-ignore lint/style/useConst: props
   let { width = 350, height= 720 }: Props = $props();
 </script>
 

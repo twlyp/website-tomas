@@ -5,12 +5,9 @@
   import Graph from "$components/Graph";
   import { NODES } from "$constants";
 
-  // biome-ignore lint/style/useConst: bound variable
   let width: number = $state(0);
-  // biome-ignore lint/style/useConst: bound variable
   let height: number = $state(0);
 
-  // biome-ignore lint/style/useConst: props
   let { children } = $props();
 </script>
 

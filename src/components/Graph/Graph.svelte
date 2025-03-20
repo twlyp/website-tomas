@@ -14,7 +14,6 @@
     height: number;
   }
 
-  // biome-ignore lint/style/useConst: props
   let { nodes: inputNodes, width, height }: Props = $props();
 
   let svg: SVGSVGElement;

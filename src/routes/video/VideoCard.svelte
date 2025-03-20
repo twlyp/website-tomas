@@ -7,7 +7,6 @@
     parentHeight: number;
   }
 
-  // biome-ignore lint/style/useConst: props
   let { title, videoId, parentWidth, parentHeight }: Props = $props();
 </script>
 

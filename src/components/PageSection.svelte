@@ -10,7 +10,6 @@
     page: PAGES;
   }
 
-  // biome-ignore lint/style/useConst: props
   let { page, children }: Props = $props();
 </script>
 

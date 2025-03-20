@@ -1,5 +1,18 @@
 {
-	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-	"files": { "ignore": ["node_modules", ".svelte-kit"] },
-	"formatter": { "lineWidth": 120 }
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": { "ignore": ["node_modules", ".svelte-kit"] },
+  "formatter": { "lineWidth": 120 },
+  "overrides": [
+    {
+      "include": ["*.svelte", "*.astro", "*.vue"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          }
+        }
+      }
+    }
+  ]
 }
