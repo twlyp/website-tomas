@@ -1,15 +1,14 @@
 <script lang="ts">
   interface Props {
     width?: number;
+    height?: number;
   }
 
-  const ASPECT_RATIO = 2 / 4;
-
   // biome-ignore lint/style/useConst: props
-  let { width = 350 }: Props = $props();
-  const height = $derived(width / ASPECT_RATIO);
+  let { width = 350, height= 720 }: Props = $props();
 </script>
 
+<!-- use inline-CSS width and height to show only the current track -->
 <iframe
   title="auno's album parto on bandcamp"
   {width}

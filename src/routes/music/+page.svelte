@@ -5,5 +5,7 @@
 </script>
 
 <PageSection page={PAGES.MUSIC}>
-  <CardParto />
-</PageSection>
+  <div class="w-full h-full flex flex-row flex-wrap items-center justify-start">
+    <CardParto />
+  </div></PageSection
+>

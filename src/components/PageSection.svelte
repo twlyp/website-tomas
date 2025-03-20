@@ -22,7 +22,7 @@
   onclick={() => goto("/")}
 >
   <div
-    class="w-full h-full overflow-scroll no-scrollbar rounded-md flex flex-col items-center p-5"
+    class="w-full h-full overflow-scroll no-scrollbar rounded-md p-5"
     style="background-color: {COLORS_PAGES_BACKGROUND[page] ?? 'white'}"
     onclick={(e) => e.stopPropagation()}
   >
