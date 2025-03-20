@@ -3,20 +3,12 @@
 
   const stopOffsets = [0, 25, 50, 75, 100];
 
-  const getStopIdx = (idx: number) =>
-    idx < 3 ? idx : stopOffsets.length - idx - 1;
+  const getStopIdx = (idx: number) => (idx < 3 ? idx : stopOffsets.length - idx - 1);
 </script>
 
-<svg class="absolute top-0 left-0 w-screen h-screen">
+<svg class="absolute top-0 left-0 h-screen w-screen">
   <defs>
-    <linearGradient
-      id="sunsetGradient"
-      x1="100%"
-      y1="0"
-      x2="0%"
-      y2="100%"
-      spreadMethod="reflect"
-    >
+    <linearGradient id="sunsetGradient" x1="100%" y1="0" x2="0%" y2="100%" spreadMethod="reflect">
       {#each stopOffsets as offset, idx}
         <stop
           offset="{offset}%"
@@ -24,30 +16,10 @@
           stop-opacity:{COLORS_BACKGROUND_GRADIENT[getStopIdx(idx)].opacity}"
         />
       {/each}
-      <animate
-        attributeName="x1"
-        values="0%;100%"
-        dur="15s"
-        repeatCount="indefinite"
-      />
-      <animate
-        attributeName="y1"
-        values="0%;100%"
-        dur="15s"
-        repeatCount="indefinite"
-      />
-      <animate
-        attributeName="x2"
-        values="100%;200%"
-        dur="15s"
-        repeatCount="indefinite"
-      />
-      <animate
-        attributeName="y2"
-        values="100%;200%"
-        dur="15s"
-        repeatCount="indefinite"
-      />
+      <animate attributeName="x1" values="0%;100%" dur="15s" repeatCount="indefinite" />
+      <animate attributeName="y1" values="0%;100%" dur="15s" repeatCount="indefinite" />
+      <animate attributeName="x2" values="100%;200%" dur="15s" repeatCount="indefinite" />
+      <animate attributeName="y2" values="100%;200%" dur="15s" repeatCount="indefinite" />
     </linearGradient>
   </defs>
 

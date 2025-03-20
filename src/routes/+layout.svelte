@@ -22,7 +22,7 @@
   onkeydowncapture={onKeydownBackground}
 />
 
-<div class="absolute top-0 left-0 w-screen h-screen overflow-hidden">
+<div class="absolute top-0 left-0 h-screen w-screen overflow-hidden">
   <Background />
   <BackgroundLogo />
 
@@ -30,12 +30,7 @@
     <Graph {width} {height} nodes={NODES} />
   {/if}
 
-  <a
-    href="mailto:tomeyzaguirre@gmail.com"
-    class="absolute bottom-3 right-5 text-s"
-  >
-    contact me
-  </a>
+  <a href="mailto:tomeyzaguirre@gmail.com" class="text-s absolute right-5 bottom-3"> contact me </a>
 </div>
 
 {@render children()}

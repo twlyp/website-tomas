@@ -1,11 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { COLORS_NODE } from "$constants";
-  import {
-    type NodeDatum,
-    randomizeNodes,
-    startSimulation,
-  } from "./dragSimulation";
+  import { type NodeDatum, randomizeNodes, startSimulation } from "./dragSimulation";
 
   interface Props {
     nodes: NodeDatum[];
@@ -28,7 +24,7 @@
       refreshNodes: () => {
         nodes = [...nodes];
       },
-    })
+    }),
   );
 </script>
 
@@ -52,11 +48,7 @@
             cx={node.x}
             cy={node.y}
           />
-          <text
-            x={node.x}
-            y={node.y}
-            text-anchor="middle"
-            dominant-baseline="middle"
+          <text x={node.x} y={node.y} text-anchor="middle" dominant-baseline="middle"
             >{node.label}
           </text>
         </g>

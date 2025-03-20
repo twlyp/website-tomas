@@ -16,7 +16,7 @@
 </script>
 
 <div
-  class="relative w-full h-full overflow-scroll no-scrollbar"
+  class="relative no-scrollbar h-full w-full overflow-scroll"
   bind:clientWidth={width}
   bind:clientHeight={height}
 >

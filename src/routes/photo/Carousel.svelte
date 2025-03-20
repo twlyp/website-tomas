@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { ComponentProps } from "svelte";
   import CardPhoto, { type Props as CardPhotoProps } from "./CardPhoto.svelte";
   import { mod, randomInt } from "$utils";
 
@@ -28,7 +27,7 @@
 </script>
 
 <div
-  class="relative w-full h-full"
+  class="relative h-full w-full"
   use:focus
   onclick={() => changePhoto(+1)}
   onkeydown={onKeydown}

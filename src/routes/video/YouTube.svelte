@@ -3,7 +3,7 @@
     width?: number;
     videoId: string;
   }
-  
+
   const ASPECT_RATIO = 7 / 4;
 
   let { width = 560, videoId }: Props = $props();

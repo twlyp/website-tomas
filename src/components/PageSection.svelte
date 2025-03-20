@@ -16,19 +16,19 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
-  class="absolute overflow-hidden sm:p-5 w-screen h-screen bg-transparent"
+  class="absolute h-screen w-screen overflow-hidden bg-transparent sm:p-5"
   transition:scale={{ duration: 400, easing: quadInOut }}
   onclick={() => goto("/")}
 >
   <div
-    class="w-full h-full overflow-scroll no-scrollbar sm:rounded-md p-5"
+    class="no-scrollbar h-full w-full overflow-scroll p-5 sm:rounded-md"
     style="background-color: {COLORS_PAGES_BACKGROUND[page] ?? 'white'}"
     onclick={(e) => e.stopPropagation()}
   >
     {@render children()}
   </div>
 
-  <a class="fixed top-7 right-7 bg-none rounded-full" href="/">
+  <a class="fixed top-7 right-7 rounded-full bg-none" href="/">
     <IconCross />
   </a>
 </div>

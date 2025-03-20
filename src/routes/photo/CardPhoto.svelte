@@ -21,25 +21,21 @@
 </script>
 
 <div
-  class="w-full h-full sm:px-10 sm:py-5 flex flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-between {klass}"
+  class="flex h-full w-full flex-col items-center justify-center sm:px-10 sm:py-5 lg:flex-row lg:items-end lg:justify-between {klass}"
   {style}
 >
-  <div class="lg:hidden grow"></div>
+  <div class="grow lg:hidden"></div>
 
-  <div class="hidden lg:block mr-3">
+  <div class="mr-3 hidden lg:block">
     <h3>{title}</h3>
     <h4>{location}, {date}</h4>
   </div>
 
-  <img
-    class="max-h-full max-w-full object-contain"
-    src={imageSrc}
-    alt={imageAlt}
-  />
+  <img class="max-h-full max-w-full object-contain" src={imageSrc} alt={imageAlt} />
 
-  <div class="lg:hidden grow"></div>
+  <div class="grow lg:hidden"></div>
 
-  <div class="lg:hidden mt-3 text-center">
+  <div class="mt-3 text-center lg:hidden">
     <h3>{title}</h3>
     <h4>{location}, {date}</h4>
   </div>
