@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { currentPage } from "$stores";
   import { COLORS_NODE } from "$constants";
   import {
     type NodeDatum,
     randomizeNodes,
     startSimulation,
   } from "./dragSimulation";
+  import { goto } from "$app/navigation";
 
   interface Props {
     nodes: NodeDatum[];
@@ -32,27 +32,21 @@
     })
   );
 
-  function onClickBackground() {
-    currentPage.set(null);
-  }
 
   function onKeydownBackground(event: KeyboardEvent) {
-    if (event.key === "Escape") currentPage.set(null);
+    if (event.key === "Escape") goto("/");
   }
 
   function onClickNode(event: MouseEvent, node: NodeDatum) {
-    event.stopPropagation();
-    currentPage.set(node.page);
+    goto(`/${node.page}`);
   }
 
   function onKeydownNode(event: KeyboardEvent, node: NodeDatum) {
-    event.stopPropagation();
-    if (event.key === "Enter") currentPage.set(node.page);
+    if (event.key === "Enter") goto(`/${node.page}`);
   }
 </script>
 
 <svelte:window
-  onclick={onClickBackground}
   onkeydowncapture={onKeydownBackground}
 />
 
