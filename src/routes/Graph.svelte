@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { currentPage } from "./stores";
-  import { COLORS_NODE } from "./constants";
+  import { currentPage } from "$stores";
+  import { COLORS_NODE } from "$constants";
   import {
     type NodeDatum,
     randomizeNodes,

@@ -3,7 +3,7 @@
   import Background from "./Background.svelte";
   import BackgroundLogo from "./BackgroundLogo.svelte";
   import Graph from "./Graph.svelte";
-  import { NODES } from "./constants";
+  import { NODES } from "$constants";
 
   // biome-ignore lint/style/useConst: bound variable
   let width: number = $state(0);

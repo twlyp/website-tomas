@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { COLORS_BACKGROUND_GRADIENT } from "./constants";
+  import { COLORS_BACKGROUND_GRADIENT } from "$constants";
 
   const stopOffsets = [0, 25, 50, 75, 100];
 

@@ -16,6 +16,13 @@ const config = {
       precompress: false,
       strict: true,
     }),
+    alias: {
+      $components: "./src/components",
+      $constants: "./src/constants.ts",
+      $stores: "./src/stores.ts",
+      $types: "./src/types.ts",
+      $utils: "./src/utils.ts",
+    },
     paths: {
       base: process.argv.includes("dev") ? "" : process.env.BASE_PATH,
     },
