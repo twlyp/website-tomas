@@ -24,8 +24,6 @@
     <Graph {width} {height} nodes={NODES} />
   {/if}
 
-  <a href="/music" class="absolute top-10 left-10">Music</a>
-
   <a
     href="mailto:tomeyzaguirre@gmail.com"
     class="absolute bottom-3 right-5 text-s"
