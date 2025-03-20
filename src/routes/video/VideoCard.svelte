@@ -1,19 +1,23 @@
 <script lang="ts">
-  import YouTube from "./YouTube.svelte";
+  import YouTube from "$components/EmbedYouTube.svelte";
   interface Props {
     title: string;
     videoId: string;
-    parentWidth: number;
-    parentHeight: number;
   }
 
-  let { title, videoId, parentWidth, parentHeight }: Props = $props();
+  let width: number = $state(0);
+  let { title, videoId }: Props = $props();
 </script>
 
 <div
-  class="relative flex flex-col items-center justify-center pb-28"
-  style="width: {parentWidth}px; height: {parentHeight}px;"
+  class="relative flex h-full w-full flex-col items-center justify-center pb-10"
+  bind:clientWidth={width}
 >
-  <YouTube {videoId} width={parentWidth} />
-  <h4 class="absolute bottom-0 mb-2 -translate-y-0 text-gray-200">{title}</h4>
+  <div class="grow"></div>
+
+  <YouTube {videoId} {width}/>
+
+  <div class="grow"></div>
+
+  <h3 class="text-gray-200">{title}</h3>
 </div>
