@@ -7,7 +7,7 @@
   import { COLORS_PAGES_BACKGROUND, type PAGES } from "$constants";
 
   interface Props extends ChildrenProp {
-    page: PAGES;
+    page?: PAGES;
   }
 
   let { page, children }: Props = $props();
@@ -22,7 +22,7 @@
 >
   <div
     class="no-scrollbar h-full w-full overflow-scroll p-5 sm:rounded-md"
-    style="background-color: {COLORS_PAGES_BACKGROUND[page] ?? 'white'}"
+    style="background-color: {page ? COLORS_PAGES_BACKGROUND[page] : '#00000099'}"
     onclick={(e) => e.stopPropagation()}
   >
     {@render children()}
