@@ -2,4 +2,5 @@
   import OpenPage from "./OpenPage.svelte";
 </script>
 
-<OpenPage />
+
+<!-- <OpenPage /> -->

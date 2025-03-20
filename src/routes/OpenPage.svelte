@@ -2,7 +2,7 @@
   import PagePhoto from "../components/PagePhoto.svelte";
   import { COLORS_PAGES_BACKGROUND, PAGES } from "./constants";
   import { currentPage } from "./stores";
-  import IconCross from "./IconCross.svelte";
+  import IconCross from "../components/IconCross.svelte";
   import VideoPage from "./video/VideoPage.svelte";
   import MusicPage from "./music/MusicPage.svelte";
   import { scale } from "svelte/transition";

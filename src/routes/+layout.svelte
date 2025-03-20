@@ -11,21 +11,20 @@
   let height: number = $state(0);
 
   // biome-ignore lint/style/useConst: props
-  let {children} = $props()
+  let { children } = $props();
 </script>
 
-<svelte:window
-  bind:innerWidth={width}
-  bind:innerHeight={height}
-/>
+<svelte:window bind:innerWidth={width} bind:innerHeight={height} />
 
 <div class="absolute top-0 left-0 w-screen h-screen overflow-hidden">
   <Background />
   <BackgroundLogo />
 
   {#if width && height}
-    <Graph width={width} height={height} nodes={NODES} />
+    <Graph {width} {height} nodes={NODES} />
   {/if}
+
+  <a href="/music" class="absolute top-10 left-10">Music</a>
 
   <a
     href="mailto:tomeyzaguirre@gmail.com"
