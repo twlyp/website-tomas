@@ -48,7 +48,7 @@
             cx={node.x}
             cy={node.y}
           />
-          <text x={node.x} y={node.y} text-anchor="middle" dominant-baseline="middle"
+          <text x={node.x} y={node.y} text-anchor="middle" dominant-baseline="middle" font-family="Tomasito" font-size="30"
             >{node.label}
           </text>
         </g>
