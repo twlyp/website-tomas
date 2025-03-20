@@ -1,8 +1,8 @@
 <script lang="ts">
   import "../app.css";
-  import Background from "./Background.svelte";
-  import BackgroundLogo from "./BackgroundLogo.svelte";
-  import Graph from "./Graph.svelte";
+  import Background from "$components/Background.svelte";
+  import BackgroundLogo from "$components/BackgroundLogo.svelte";
+  import Graph from "$components/Graph";
   import { NODES } from "$constants";
 
   // biome-ignore lint/style/useConst: bound variable
