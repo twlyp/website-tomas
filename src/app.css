@@ -45,3 +45,8 @@
   font-display: swap;
   src: url("/fonts/Tomasito.otf") format("opentype");
 }
+
+@theme {
+  --font-tomeyza: "Tomeyza", sans-serif;
+  --font-tomasito: "Tomasito", sans-serif;
+}
