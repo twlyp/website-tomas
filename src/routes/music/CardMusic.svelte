@@ -8,7 +8,7 @@
   const { children, title, text }: Props = $props();
 </script>
 
-<div class="mb-10 flex w-full flex-col items-center text-gray-200 md:grid md:grid-cols-2">
+<div class="pb-20 flex w-full flex-col items-center text-gray-200 md:grid md:grid-cols-2">
   <h1 class="mb-5 font-tomeyza text-3xl md:hidden">{title}</h1>
 
   <div class="mb-5 justify-self-center md:mb-0">
