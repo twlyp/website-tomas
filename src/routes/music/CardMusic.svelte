@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { ChildrenProp } from "$types";
+  import type { ChildrenProp, HTMLProps } from "$types";
 
-  interface Props extends ChildrenProp {
+  interface Props extends ChildrenProp, HTMLProps {
     title: string;
     text?: string;
   }
-  const { children, title, text }: Props = $props();
+  const { children, title, text, id }: Props = $props();
 </script>
 
-<div class="pb-20 flex w-full flex-col items-center text-gray-200 md:grid md:grid-cols-2">
+<div class="pb-20 flex w-full flex-col items-center md:grid md:grid-cols-2" {id}>
   <h1 class="mb-5 font-tomeyza text-3xl md:hidden">{title}</h1>
 
   <div class="mb-5 justify-self-center md:mb-0">

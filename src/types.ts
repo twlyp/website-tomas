@@ -6,5 +6,6 @@ export interface ChildrenProp {
 
 export interface HTMLProps {
   class?: string;
+  id?: string;
   style?: string;
 }
