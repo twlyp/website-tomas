@@ -3,10 +3,11 @@
   import type { Component as ComponentType, ComponentProps } from "svelte";
 
   interface Props {
+    direction: "horizontal" | "vertical";
     Component: ComponentType<T>;
     data: T[];
   }
-  let { Component, data }: Props = $props();
+  let { direction, Component, data }: Props = $props();
 
   let currentSlide = $state(randomInt(data.length - 1));
 
@@ -25,6 +26,12 @@
   function focus(element: HTMLElement) {
     element.focus();
   }
+
+  const getStyle = (idx: number) => {
+    return direction === "horizontal"
+      ? `left: ${idx * 100}vw; transform: translateX(${-currentSlide * 100}vw);`
+      : `top: ${idx * 100}vh; transform: translateY(${-currentSlide * 100}vh);`;
+  };
 </script>
 
 <div
@@ -38,9 +45,7 @@
   {#each data as props, idx}
     <Component
       class="absolute top-0 transition-transform duration-500 ease-in-out"
-      style="left: {idx * 100}vw;
-             transform: translateX({-currentSlide * 100}vw);
-             "
+      style={getStyle(idx)}
       {...props}
     />
   {/each}

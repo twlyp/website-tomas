@@ -30,5 +30,5 @@
 </script>
 
 <PageSection page={PAGES.PHOTO}>
-  <Carousel Component={CardPhoto} data={photos} />
+  <Carousel direction="horizontal" Component={CardPhoto} data={photos} />
 </PageSection>
