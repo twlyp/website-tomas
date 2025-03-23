@@ -1,10 +1,10 @@
-<script lang="ts" generics="T extends {}">
+<script lang="ts" generics="T">
   import { mod, randomInt } from "$utils";
-  import type { Component as ComponentType, ComponentProps } from "svelte";
+  import type { Component as ComponentType } from "svelte";
 
   interface Props {
     direction: "horizontal" | "vertical";
-    Component: ComponentType<T>;
+    Component: ComponentType<T & { class: string, style: string }>;
     data: T[];
   }
   let { direction, Component, data }: Props = $props();
