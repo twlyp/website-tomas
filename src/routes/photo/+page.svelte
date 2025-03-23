@@ -5,6 +5,7 @@
   import Carousel from "./Carousel.svelte";
   import PageSection from "$components/PageSection.svelte";
   import { PAGES } from "$constants";
+  import CardPhoto from "./CardPhoto.svelte";
 
   const photos = [
     {
@@ -29,5 +30,5 @@
 </script>
 
 <PageSection page={PAGES.PHOTO}>
-  <Carousel {photos} />
+  <Carousel Component={CardPhoto} data={photos} />
 </PageSection>

@@ -1,23 +1,24 @@
-<script lang="ts">
-  import CardPhoto, { type Props as CardPhotoProps } from "./CardPhoto.svelte";
+<script lang="ts" generics="T extends {}">
   import { mod, randomInt } from "$utils";
+  import type { Component as ComponentType, ComponentProps } from "svelte";
 
   interface Props {
-    photos: CardPhotoProps[];
+    Component: ComponentType<T>;
+    data: T[];
   }
-  let { photos }: Props = $props();
+  let { Component, data }: Props = $props();
 
-  let currentPhotoIdx = $state(randomInt(photos.length - 1));
+  let currentSlide = $state(randomInt(data.length - 1));
 
-  function changePhoto(delta: number) {
-    currentPhotoIdx = mod(currentPhotoIdx + delta, photos.length);
+  function changeSlide(delta: number) {
+    currentSlide = mod(currentSlide + delta, data.length);
   }
 
   function onKeydown(ev: KeyboardEvent) {
     if (ev.key === "ArrowRight" || ev.key === "ArrowDown") {
-      changePhoto(+1);
+      changeSlide(+1);
     } else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp") {
-      changePhoto(-1);
+      changeSlide(-1);
     }
   }
 
@@ -29,18 +30,18 @@
 <div
   class="relative h-full w-full"
   use:focus
-  onclick={() => changePhoto(+1)}
+  onclick={() => changeSlide(+1)}
   onkeydown={onKeydown}
   role="button"
   tabindex="0"
 >
-  {#each photos as photo, idx}
-    <CardPhoto
+  {#each data as props, idx}
+    <Component
       class="absolute top-0 transition-transform duration-500 ease-in-out"
       style="left: {idx * 100}vw;
-             transform: translateX({-currentPhotoIdx * 100}vw);
+             transform: translateX({-currentSlide * 100}vw);
              "
-      {...photo}
+      {...props}
     />
   {/each}
 </div>
