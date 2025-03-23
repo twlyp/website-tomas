@@ -35,7 +35,7 @@
 </script>
 
 <div
-  class="relative h-full w-full"
+  class="relative h-full w-full overflow-hidden"
   use:focus
   onclick={() => changeSlide(+1)}
   onkeydown={onKeydown}

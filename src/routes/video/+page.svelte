@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Carousel from "$components/Carousel.svelte";
   import PageSection from "$components/PageSection.svelte";
   import { PAGES } from "$constants";
   import VideoCard from "./VideoCard.svelte";
@@ -15,9 +16,5 @@
 </script>
 
 <PageSection page={PAGES.VIDEO}>
-  <div class="h-full w-full">
-    {#each videos as { title, videoId }}
-      <VideoCard {title} {videoId} />
-    {/each}
-  </div>
+    <Carousel direction="vertical" Component={VideoCard} data={videos} />
 </PageSection>
