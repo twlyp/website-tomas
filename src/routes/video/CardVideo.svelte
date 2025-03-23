@@ -21,5 +21,5 @@
 
   <div class="grow"></div>
 
-  <h3 class="pb-5 font-tomeyza text-center text-3xl text-gray-200 lg:text-2xl">{title}</h3>
+  <h3 class="pb-5 text-center font-tomeyza text-3xl text-gray-200 lg:text-2xl">{title}</h3>
 </div>

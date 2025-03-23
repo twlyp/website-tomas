@@ -2,7 +2,7 @@
   import Carousel from "$components/Carousel.svelte";
   import PageSection from "$components/PageSection.svelte";
   import { PAGES } from "$constants";
-  import VideoCard from "./VideoCard.svelte";
+  import CardVideo from "./CardVideo.svelte";
 
   const videos = [
     { title: "Transitions - nowness", videoId: "6VCX670GnpU" },
@@ -16,5 +16,5 @@
 </script>
 
 <PageSection page={PAGES.VIDEO}>
-    <Carousel direction="vertical" Component={VideoCard} data={videos} />
+    <Carousel direction="vertical" Component={CardVideo} data={videos} />
 </PageSection>
