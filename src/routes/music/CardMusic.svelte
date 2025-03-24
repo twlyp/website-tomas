@@ -5,14 +5,14 @@
     title: string;
     text?: string;
   }
-  const { children, title, text, id }: Props = $props();
+  const { class: klass, children, style, title, text}: Props = $props();
 </script>
 
-<div class="pb-20 flex w-full flex-col items-center lg:grid lg:grid-cols-2" {id}>
+<div class="flex h-full w-full flex-col items-center lg:grid lg:grid-cols-2 {klass}" {style}>
   <h1 class="mb-5 font-tomeyza text-3xl lg:hidden">{title}</h1>
 
   <div class="mb-5 justify-self-center lg:mb-0">
-    {@render children()}
+      {@render children()}
   </div>
 
   <div class="lg:ml-10 lg:justify-self-start">
