@@ -36,12 +36,11 @@
   }
 
   function onSwipe(ev: SwipeCustomEvent) {
-    console.log('swipe:', ev)
     if (ev.detail.direction === "right" || ev.detail.direction === "bottom") {
       changeSlide(-1);
     } else if (ev.detail.direction === "left" || ev.detail.direction === "top") {
       changeSlide(+1);
-    } 
+    }
   }
 
   function focus(element: HTMLElement) {
