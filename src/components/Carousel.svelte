@@ -2,6 +2,7 @@
   import { mod } from "$utils";
   import type { Component as ComponentType } from "svelte";
   import { page } from "$app/state";
+  import { swipe, type SwipeCustomEvent } from "svelte-gestures";
 
   interface Props {
     direction: "horizontal" | "vertical";
@@ -34,6 +35,15 @@
     }
   }
 
+  function onSwipe(ev: SwipeCustomEvent) {
+    console.log('swipe:', ev)
+    if (ev.detail.direction === "right" || ev.detail.direction === "bottom") {
+      changeSlide(-1);
+    } else if (ev.detail.direction === "left" || ev.detail.direction === "top") {
+      changeSlide(+1);
+    } 
+  }
+
   function focus(element: HTMLElement) {
     element.focus();
   }
@@ -48,8 +58,10 @@
 <div
   class="relative h-full w-full overflow-hidden"
   use:focus
+  use:swipe={() => ({ timeframe: 300, minSwipeDistance: 60 })}
   onclick={() => changeSlide(+1)}
   onkeydown={onKeydown}
+  onswipe={onSwipe}
   role="button"
   tabindex="0"
 >
