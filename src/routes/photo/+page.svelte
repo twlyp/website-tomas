@@ -9,19 +9,22 @@
 
   const photos = [
     {
-      title: "M U I O P O T M O S - Infringe",
+      title: "M U I O P O T M O S",
+      publication: "Infringe",
       location: "Berlin",
       date: "2021",
       imageSrc: muiopotamos,
     },
     {
-      title: "Prologo - Fucking Young!",
+      title: "Prologo",
+      publication: "Fucking Young!",
       location: "Berlin",
       date: "2021",
       imageSrc: prologo,
     },
     {
-      title: "Vegan Dressing - Hart Magazine",
+      title: "Vegan Dressing",
+      publication: "Hart Magazine",
       location: "Berlin",
       date: "2022",
       imageSrc: vegan,
