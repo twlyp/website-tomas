@@ -16,5 +16,5 @@
 </script>
 
 <PageSection page={PAGES.VIDEO}>
-    <Carousel direction="vertical" Component={CardVideo} data={videos} />
+  <Carousel direction="vertical" Component={CardVideo} data={videos} />
 </PageSection>

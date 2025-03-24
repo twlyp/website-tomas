@@ -34,7 +34,7 @@
       </p>
 
       <ul>
-        <li>“Evualuacion sin Costo” (CL 2024)</li>
+        <li><a href="?slide=1">“Evualuacion sin Costo” (CL 2024)</a></li>
         <li>“Galeria MANA” (IP 2024)</li>
         <li>“MOLT” (DE 2023)</li>
         <li>“Eboded festival” (IL 2023)</li>

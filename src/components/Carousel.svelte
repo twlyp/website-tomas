@@ -1,15 +1,26 @@
 <script lang="ts" generics="T">
   import { mod, randomInt } from "$utils";
   import type { Component as ComponentType } from "svelte";
+  import { page } from "$app/state";
 
   interface Props {
     direction: "horizontal" | "vertical";
-    Component: ComponentType<T & { class: string, style: string }>;
+    Component: ComponentType<T & { class: string; style: string }>;
     data: T[];
   }
   let { direction, Component, data }: Props = $props();
 
-  let currentSlide = $state(randomInt(data.length - 1));
+  const slideParam = page.url.searchParams.get("slide");
+  const parsedSlideParam = slideParam && parseInt(slideParam);
+  const initialSlide =
+    parsedSlideParam &&
+    !isNaN(parsedSlideParam) &&
+    parsedSlideParam >= 0 &&
+    parsedSlideParam < data.length
+      ? parsedSlideParam
+      : 0;
+
+  let currentSlide = $state(initialSlide);
 
   function changeSlide(delta: number) {
     currentSlide = mod(currentSlide + delta, data.length);

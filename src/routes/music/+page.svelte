@@ -16,7 +16,6 @@
     {
       title: "evaluacion sin costo 4",
       text: "performance in chile, 2024",
-
       embedInstagram: {
         imgSrc: aunoEvaluacion,
         imgAlt: "screenshot from auno's performance at evaluación sin costo 4, chile, 2024",
