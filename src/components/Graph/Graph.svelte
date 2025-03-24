@@ -7,9 +7,11 @@
     nodes: NodeDatum[];
     width: number;
     height: number;
+    isTabbable?: boolean;
   }
 
-  let { nodes: inputNodes, width, height }: Props = $props();
+  let { nodes: inputNodes, width, height, isTabbable = true }: Props = $props();
+  let tabIndex = $derived(isTabbable ? 0 : -1);
 
   let svg: SVGSVGElement;
 
@@ -37,7 +39,7 @@
 >
   <g id="graph" role="navigation">
     {#each nodes as node}
-      <a href={`/${node.page}`}>
+      <a href={`/${node.page}`} tabindex={tabIndex}>
         <g class="node-group">
           <circle
             class="node"

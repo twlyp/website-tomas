@@ -5,6 +5,7 @@
   import Graph from "$components/Graph";
   import { NODES } from "$constants";
   import { goto } from "$app/navigation";
+  import { page } from "$app/state";
 
   let width: number = $state(0);
   let height: number = $state(0);
@@ -14,6 +15,8 @@
   function onKeydownBackground(event: KeyboardEvent) {
     if (event.key === "Escape") goto("/");
   }
+
+  const isGraphTabbable = $derived(page.route.id === "/");
 </script>
 
 <svelte:window
@@ -27,7 +30,7 @@
   <BackgroundLogo />
 
   {#if width && height}
-    <Graph {width} {height} nodes={NODES} />
+    <Graph {width} {height} nodes={NODES} isTabbable={isGraphTabbable} />
   {/if}
 </div>
 
