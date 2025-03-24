@@ -29,8 +29,6 @@
   {#if width && height}
     <Graph {width} {height} nodes={NODES} />
   {/if}
-
-  <a href="mailto:tomeyzaguirre@gmail.com" class="text-m absolute right-12 bottom-7 font-tomeyza opacity-70"> contact me </a>
 </div>
 
 {@render children()}
