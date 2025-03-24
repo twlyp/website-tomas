@@ -19,7 +19,7 @@
     class="flex h-full w-full flex-col items-center justify-center text-gray-200 {cardMusicProps.class}"
     style={cardMusicProps.style}
   >
-    <div class="max-w-2xl text-center font-serif text-xl">
+    <div class="text-l max-w-2xl text-center font-serif md:text-xl">
       <p class="mt-5 mb-10">
         AUNO is the sound/performance project of Berlin-based Chilean artist Tomás Eyzaguirre, in
         which they focus on exploring the corporeality of the voice. Working mainly with singing,
