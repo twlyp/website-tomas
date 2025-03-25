@@ -1,22 +1,22 @@
 <script lang="ts">
   import { quadInOut } from "svelte/easing";
   import { scale } from "svelte/transition";
-  import type { ChildrenProp } from "$types";
+  import type { ChildrenProp, HTMLProps } from "$types";
   import IconCross from "$components/IconCross.svelte";
   import { goto } from "$app/navigation";
   import { COLORS_PAGES_BACKGROUND, type PAGES } from "$constants";
 
-  interface Props extends ChildrenProp {
+  interface Props extends ChildrenProp, HTMLProps {
     page?: PAGES;
   }
 
-  let { page, children }: Props = $props();
+  let { class: klass, page, children }: Props = $props();
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
-  class="absolute h-screen w-screen overflow-hidden bg-transparent sm:p-5"
+  class="absolute h-screen w-screen overflow-hidden bg-transparent sm:p-5 {klass}"
   transition:scale={{ duration: 400, easing: quadInOut }}
   onclick={() => goto("/")}
 >
