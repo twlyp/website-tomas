@@ -4,7 +4,7 @@ import { type PAGES } from "$constants";
 import {
   createDragBehavior,
   getDraggedHandler,
-  randomizeNodes,
+  initNodes,
   startSimulation,
 } from "./dragSimulation";
 
@@ -16,7 +16,7 @@ export interface NodeDatum extends d3.SimulationNodeDatum {
 export type LinkDatum = d3.SimulationLinkDatum<NodeDatum>;
 
 export function useSimulation(width: number, height: number, inputNodes: NodeDatum[]) {
-  let nodes = $state(randomizeNodes(inputNodes, width, height));
+  let nodes = $state(initNodes(inputNodes, width, height));
   let simulation = $state<d3.Simulation<NodeDatum, LinkDatum> | null>(null);
   let dragBehavior = $state<ReturnType<typeof createDragBehavior> | null>(null);
 

@@ -12,10 +12,10 @@ export interface NodeDatum extends d3.SimulationNodeDatum {
 export type LinkDatum = d3.SimulationLinkDatum<NodeDatum>;
 type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>;
 
-const STRENGTH_BOUNDARY = 0.002;
+const STRENGTH_BOUNDARY = 0.005;
 const DECAY_ALPHA = 0.02;
 const DECAY_VELOCITY = 0.02;
-const TARGET_ALPHA = 0.2;
+const TARGET_ALPHA = 1;
 
 interface StartSimulationParams {
   nodes: NodeDatum[];
@@ -32,16 +32,20 @@ export function startSimulation({ nodes, svg, refreshNodes }: StartSimulationPar
     .alphaDecay(DECAY_ALPHA)
     .velocityDecay(DECAY_VELOCITY)
     .alphaTarget(TARGET_ALPHA)
-    .force("charge", d3.forceManyBody())
+    .force("charge", d3.forceManyBody().strength(-5))
     .force(
       "collide",
       d3.forceCollide((d) => d.radius),
     )
-    .force(
-      "boundary",
-      forceBoundary(-halfWidth, -halfHeight, halfWidth, halfHeight).strength(STRENGTH_BOUNDARY),
-    )
+    // .force("center", d3.forceCenter(0, 0).strength(1))
+    // .force("radial", d3.forceRadial(halfWidth / 3, 0, 0).strength(0.005))
+    .force("x", d3.forceX(0).strength(0.005))
+    .force("y", d3.forceY(0).strength(0.005))
     .on("tick", simulationUpdate);
+  // .force(
+  //   "boundary",
+  //   forceBoundary(-halfWidth, -halfHeight, halfWidth, halfHeight).strength(STRENGTH_BOUNDARY),
+  // )
 
   function simulationUpdate() {
     simulation.tick();
@@ -68,13 +72,13 @@ export function createDragBehavior(
   }
 
   function dragStarted(event: DragEvent) {
-    if (!event.active) simulation.alphaTarget(0.3).restart();
+    // if (!event.active) simulation.alphaTarget(0.3).restart();
     event.subject.fx = event.subject.x;
     event.subject.fy = event.subject.y;
   }
 
   function dragEnded(event: DragEvent) {
-    if (!event.active) simulation.alphaTarget(0);
+    // if (!event.active) simulation.alphaTarget(0);
     event.subject.fx = null;
     event.subject.fy = null;
   }
@@ -97,4 +101,16 @@ export function randomizeNodes(nodes: NodeDatum[], width: number, height: number
     vx: Math.random() * NODE_INITIAL_VELOCITY,
     vy: Math.random() * NODE_INITIAL_VELOCITY,
   }));
+}
+
+export function initNodes(nodes: NodeDatum[], width: number, height: number): NodeDatum[] {
+  // return nodes.map((d) => ({
+  //   ...d,
+  //   x: Math.random() * width - width / 2,
+  //   y: Math.random() * height - height / 2,
+  //   vx: 0,
+  //   vy: 0,
+  // }));
+
+  return randomizeNodes(nodes, width, height);
 }
