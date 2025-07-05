@@ -19,21 +19,13 @@ const TARGET_ALPHA = 0.2;
 
 interface StartSimulationParams {
   nodes: NodeDatum[];
-  width: number;
-  height: number;
   svg: SVGSVGElement;
   refreshNodes: (nodes: NodeDatum[]) => void;
 }
 
-export function startSimulation({
-  nodes,
-  width,
-  height,
-  svg,
-  refreshNodes,
-}: StartSimulationParams) {
-  const halfWidth = width / 2;
-  const halfHeight = height / 2;
+export function startSimulation({ nodes, svg, refreshNodes }: StartSimulationParams) {
+  const halfWidth = svg.width.baseVal.value / 2;
+  const halfHeight = svg.height.baseVal.value / 2;
 
   const simulation = d3
     .forceSimulation<NodeDatum, LinkDatum>(nodes)
@@ -51,20 +43,25 @@ export function startSimulation({
     )
     .on("tick", simulationUpdate);
 
-  d3.select(svg as Element).call(
-    d3
-      .drag()
-      .container(svg)
-      .subject(dragSubject)
-      .on("start", dragStarted)
-      .on("drag", dragged)
-      .on("end", dragEnded),
-  );
-
   function simulationUpdate() {
     simulation.tick();
     refreshNodes(nodes);
   }
+
+  return simulation;
+}
+
+export function createDragBehavior(
+  svg: SVGSVGElement,
+  simulation: d3.Simulation<NodeDatum, LinkDatum>,
+) {
+  const dragBehavior = d3
+    .drag<SVGSVGElement, NodeDatum | undefined>()
+    .container(svg)
+    .subject(dragSubject)
+    .on("start", dragStarted)
+    .on("drag", getDraggedHandler(svg))
+    .on("end", dragEnded);
 
   function dragSubject(event: DragEvent) {
     return simulation.find(event.x, event.y);
@@ -76,16 +73,23 @@ export function startSimulation({
     event.subject.fy = event.subject.y;
   }
 
-  function dragged(event: DragEvent) {
-    event.subject.fx = bindToInterval(-halfWidth, halfWidth, event.x);
-    event.subject.fy = bindToInterval(-halfHeight, halfHeight, event.y);
-  }
-
   function dragEnded(event: DragEvent) {
     if (!event.active) simulation.alphaTarget(0);
     event.subject.fx = null;
     event.subject.fy = null;
   }
+
+  return dragBehavior;
+}
+
+export function getDraggedHandler(svg: SVGSVGElement) {
+  const width = svg.width.baseVal.value;
+  const height = svg.height.baseVal.value;
+
+  return (event: DragEvent) => {
+    event.subject.fx = bindToInterval(-0.5 * width, 0.5 * width, event.x);
+    event.subject.fy = bindToInterval(-0.5 * height, 0.5 * height, event.y);
+  };
 }
 
 export function randomizeNodes(nodes: NodeDatum[], width: number, height: number): NodeDatum[] {

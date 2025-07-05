@@ -1,7 +1,14 @@
 <script lang="ts">
+  import * as d3 from "d3";
   import { onMount } from "svelte";
   import { COLORS_NODE } from "$constants";
-  import { type NodeDatum, randomizeNodes, startSimulation } from "./dragSimulation";
+  import {
+    createDragBehavior,
+    type LinkDatum,
+    type NodeDatum,
+    randomizeNodes,
+    startSimulation,
+  } from "./dragSimulation";
 
   interface Props {
     nodes: NodeDatum[];
@@ -16,18 +23,22 @@
   let svg: SVGSVGElement;
 
   let nodes = $state(randomizeNodes(inputNodes, width, height));
+  let simulation = $state<d3.Simulation<NodeDatum, LinkDatum> | null>(null);
+  let dragBehavior = $state<ReturnType<typeof createDragBehavior> | null>(null);
+    
+  const refreshNodes = () => {
+    nodes = [...nodes];
+  };
 
-  onMount(() =>
-    startSimulation({
+  onMount(() => {
+    simulation = startSimulation({
       nodes,
-      width,
-      height,
       svg,
-      refreshNodes: () => {
-        nodes = [...nodes];
-      },
-    }),
-  );
+      refreshNodes,
+    });
+    dragBehavior = createDragBehavior(svg, simulation);
+    d3.select<SVGSVGElement, NodeDatum | undefined>(svg).call(dragBehavior);
+  });
 </script>
 
 <svg
