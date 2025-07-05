@@ -60,7 +60,7 @@ export function createDragBehavior(
     .container(svg)
     .subject(dragSubject)
     .on("start", dragStarted)
-    .on("drag", getDraggedHandler(svg))
+    .on("drag", getDraggedHandler(svg.width.baseVal.value, svg.height.baseVal.value))
     .on("end", dragEnded);
 
   function dragSubject(event: DragEvent) {
@@ -82,10 +82,7 @@ export function createDragBehavior(
   return dragBehavior;
 }
 
-export function getDraggedHandler(svg: SVGSVGElement) {
-  const width = svg.width.baseVal.value;
-  const height = svg.height.baseVal.value;
-
+export function getDraggedHandler(width: number, height: number) {
   return (event: DragEvent) => {
     event.subject.fx = bindToInterval(-0.5 * width, 0.5 * width, event.x);
     event.subject.fy = bindToInterval(-0.5 * height, 0.5 * height, event.y);

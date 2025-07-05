@@ -4,6 +4,7 @@
   import { COLORS_NODE } from "$constants";
   import {
     createDragBehavior,
+    getDraggedHandler,
     type LinkDatum,
     type NodeDatum,
     randomizeNodes,
@@ -25,7 +26,7 @@
   let nodes = $state(randomizeNodes(inputNodes, width, height));
   let simulation = $state<d3.Simulation<NodeDatum, LinkDatum> | null>(null);
   let dragBehavior = $state<ReturnType<typeof createDragBehavior> | null>(null);
-    
+
   const refreshNodes = () => {
     nodes = [...nodes];
   };
@@ -38,6 +39,10 @@
     });
     dragBehavior = createDragBehavior(svg, simulation);
     d3.select<SVGSVGElement, NodeDatum | undefined>(svg).call(dragBehavior);
+  });
+
+  $effect(() => {
+    dragBehavior?.on("drag", getDraggedHandler(width, height));
   });
 </script>
 
