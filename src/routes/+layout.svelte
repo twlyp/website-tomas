@@ -40,4 +40,8 @@
   {@render children()}
 </FirebaseApp>
 
-<style></style>
+<style>
+  :global(html) {
+    background-color: white;
+  }
+</style>
