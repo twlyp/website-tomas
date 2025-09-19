@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { COLORS_BACKGROUND_GRADIENT } from "$constants";
+  import { COLORS_BACKGROUND_GRADIENT } from "$constants"
 
-  const stopOffsets = [0, 25, 50, 75, 100];
+  const stopOffsets = [0, 25, 50, 75, 100]
 
-  const getStopIdx = (idx: number) => (idx < 3 ? idx : stopOffsets.length - idx - 1);
+  const getStopIdx = (idx: number) => (idx < 3 ? idx : stopOffsets.length - idx - 1)
 </script>
 
 <svg class="absolute top-0 left-0 h-screen w-screen">

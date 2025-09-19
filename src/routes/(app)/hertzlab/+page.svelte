@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { ComponentProps } from "svelte";
-  import CardMusicWrapper from "../music/CardMusicWrapper.svelte";
-  import aunoEvaluacion from "$lib/music/auno-evaluacion.webp";
-  import PageSection from "$components/PageSection.svelte";
+  import type { ComponentProps } from "svelte"
+  import CardMusicWrapper from "../music/CardMusicWrapper.svelte"
+  import aunoEvaluacion from "$lib/music/auno-evaluacion.webp"
+  import PageSection from "$components/PageSection.svelte"
 
   const data: Array<ComponentProps<typeof CardMusicWrapper>> = [
     {
@@ -27,7 +27,7 @@
         width: 450,
       },
     },
-  ];
+  ]
 </script>
 
 <PageSection class="text-gray-200">

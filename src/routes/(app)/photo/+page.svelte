@@ -1,11 +1,11 @@
 <script lang="ts">
-  import muiopotamos from "$lib/photo/Meta-B54_1340_c.jpg";
-  import prologo from "$lib/photo/ASR171_TE_PROLOGO_1_3-7-13-24_1340_c.jpg";
-  import vegan from "$lib/photo/ASR184_TE_SV_EDEN_19569_V1A_1340_c.jpg";
-  import Carousel from "$components/Carousel.svelte";
-  import PageSection from "$components/PageSection.svelte";
-  import { PAGES } from "$constants";
-  import CardPhoto from "./CardPhoto.svelte";
+  import muiopotamos from "$lib/photo/Meta-B54_1340_c.jpg"
+  import prologo from "$lib/photo/ASR171_TE_PROLOGO_1_3-7-13-24_1340_c.jpg"
+  import vegan from "$lib/photo/ASR184_TE_SV_EDEN_19569_V1A_1340_c.jpg"
+  import Carousel from "$components/Carousel.svelte"
+  import PageSection from "$components/PageSection.svelte"
+  import { PAGES } from "$constants"
+  import CardPhoto from "./CardPhoto.svelte"
 
   const photos = [
     {
@@ -29,7 +29,7 @@
       date: "2022",
       imageSrc: vegan,
     },
-  ];
+  ]
 </script>
 
 <PageSection page={PAGES.PHOTO}>

@@ -1,13 +1,13 @@
 <script lang="ts">
   interface Props {
-    width?: number;
-    videoId: string;
+    width?: number
+    videoId: string
   }
 
-  const ASPECT_RATIO = 7 / 4;
+  const ASPECT_RATIO = 7 / 4
 
-  let { width = 560, videoId }: Props = $props();
-  const height = $derived(width / ASPECT_RATIO);
+  let { width = 560, videoId }: Props = $props()
+  const height = $derived(width / ASPECT_RATIO)
 </script>
 
 <iframe

@@ -1,1 +1,1 @@
-export { default } from "./Graph.svelte";
+export { default } from "./Graph.svelte"

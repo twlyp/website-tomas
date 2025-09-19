@@ -1,5 +1,5 @@
-import adapter from "@sveltejs/adapter-static";
-import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import adapter from "@sveltejs/adapter-static"
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -23,12 +23,12 @@ const config = {
       $types: "./src/types.ts",
       $utils: "./src/utils.ts",
       $firebase: "./src/firebase.ts",
-      $css: "./src/app.css"
+      $css: "./src/app.css",
     },
     paths: {
       base: process.argv.includes("dev") ? "" : process.env.BASE_PATH,
     },
   },
-};
+}
 
-export default config;
+export default config

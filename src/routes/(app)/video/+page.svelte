@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Carousel from "$components/Carousel.svelte";
-  import PageSection from "$components/PageSection.svelte";
-  import { PAGES } from "$constants";
-  import CardVideo from "./CardVideo.svelte";
+  import Carousel from "$components/Carousel.svelte"
+  import PageSection from "$components/PageSection.svelte"
+  import { PAGES } from "$constants"
+  import CardVideo from "./CardVideo.svelte"
 
   const videos = [
     { title: "Transitions - nowness", videoId: "6VCX670GnpU" },
@@ -12,7 +12,7 @@
       title: "M U I O P O T M O S: the fate of the butterfly - Infringe",
       videoId: "UgVQQsdqGJU",
     },
-  ];
+  ]
 </script>
 
 <PageSection page={PAGES.VIDEO}>

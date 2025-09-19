@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type { HTMLProps } from "$types";
+  import type { HTMLProps } from "$types"
 
   export interface Props {
-    date: string;
-    imageAlt?: string;
-    imageSrc: string;
-    location: string;
-    publication?: string;
-    title: string;
+    date: string
+    imageAlt?: string
+    imageSrc: string
+    location: string
+    publication?: string
+    title: string
   }
 
   let {
@@ -19,7 +19,7 @@
     date,
     imageSrc,
     imageAlt = imageSrc,
-  }: Props & HTMLProps = $props();
+  }: Props & HTMLProps = $props()
 </script>
 
 <div

@@ -1,21 +1,21 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { COLORS_NODE } from "$constants";
-  import { type NodeDatum, randomizeNodes, startSimulation } from "./dragSimulation";
+  import { onMount } from "svelte"
+  import { COLORS_NODE } from "$constants"
+  import { type NodeDatum, randomizeNodes, startSimulation } from "./dragSimulation"
 
   interface Props {
-    nodes: NodeDatum[];
-    width: number;
-    height: number;
-    isTabbable?: boolean;
+    nodes: NodeDatum[]
+    width: number
+    height: number
+    isTabbable?: boolean
   }
 
-  let { nodes: inputNodes, width, height, isTabbable = true }: Props = $props();
-  let tabIndex = $derived(isTabbable ? 0 : -1);
+  let { nodes: inputNodes, width, height, isTabbable = true }: Props = $props()
+  let tabIndex = $derived(isTabbable ? 0 : -1)
 
-  let svg: SVGSVGElement;
+  let svg: SVGSVGElement
 
-  let nodes = $state(randomizeNodes(inputNodes, width, height));
+  let nodes = $state(randomizeNodes(inputNodes, width, height))
 
   onMount(() =>
     startSimulation({
@@ -24,10 +24,10 @@
       height,
       svg,
       refreshNodes: () => {
-        nodes = [...nodes];
+        nodes = [...nodes]
       },
     }),
-  );
+  )
 </script>
 
 <svg

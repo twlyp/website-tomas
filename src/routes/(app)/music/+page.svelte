@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { PAGES } from "$constants";
-  import PageSection from "$components/PageSection.svelte";
-  import aunoTreadmill from "$lib/music/auno-treadmill.webp";
-  import aunoEvaluacion from "$lib/music/auno-evaluacion.webp";
-  import Carousel from "$components/Carousel.svelte";
-  import CardMusicWrapper from "./CardMusicWrapper.svelte";
-  import type { ComponentProps } from "svelte";
+  import { PAGES } from "$constants"
+  import PageSection from "$components/PageSection.svelte"
+  import aunoTreadmill from "$lib/music/auno-treadmill.webp"
+  import aunoEvaluacion from "$lib/music/auno-evaluacion.webp"
+  import Carousel from "$components/Carousel.svelte"
+  import CardMusicWrapper from "./CardMusicWrapper.svelte"
+  import type { ComponentProps } from "svelte"
 
   const data: Array<ComponentProps<typeof CardMusicWrapper>> = [
     {
@@ -40,7 +40,7 @@
       },
     },
     { title: "bio" },
-  ];
+  ]
 </script>
 
 <PageSection page={PAGES.MUSIC}>

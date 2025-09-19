@@ -1,4 +1,4 @@
-import { writable } from "svelte/store";
-import type { PAGES } from "./constants";
+import { writable } from "svelte/store"
+import type { PAGES } from "./constants"
 
-export const currentPage = writable<PAGES | null>(null);
+export const currentPage = writable<PAGES | null>(null)

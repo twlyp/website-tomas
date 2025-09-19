@@ -1,8 +1,8 @@
-import js from "@eslint/js";
-import ts from "typescript-eslint";
-import svelte from "eslint-plugin-svelte";
-import globals from "globals";
-import svelteConfig from "./svelte.config.js";
+import js from "@eslint/js"
+import ts from "typescript-eslint"
+import svelte from "eslint-plugin-svelte"
+import globals from "globals"
+import svelteConfig from "./svelte.config.js"
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
@@ -30,4 +30,4 @@ export default [
   {
     ignores: ["build/", ".svelte-kit/", "dist/", "node_modules/"],
   },
-];
+]

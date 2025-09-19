@@ -1,22 +1,21 @@
 <script lang="ts">
-  import "$css";
-  import Background from "$components/Background.svelte";
-  import BackgroundLogo from "$components/BackgroundLogo.svelte";
-  import Graph from "$components/Graph";
-  import { NODES } from "$constants";
-  import { goto } from "$app/navigation";
-  import { page } from "$app/state";
+  import Background from "$components/Background.svelte"
+  import BackgroundLogo from "$components/BackgroundLogo.svelte"
+  import Graph from "$components/Graph"
+  import { NODES } from "$constants"
+  import { goto } from "$app/navigation"
+  import { page } from "$app/state"
 
-  let width: number = $state(0);
-  let height: number = $state(0);
+  let width: number = $state(0)
+  let height: number = $state(0)
 
-  let { children } = $props();
+  let { children } = $props()
 
   function onKeydownBackground(event: KeyboardEvent) {
-    if (event.key === "Escape") goto("/");
+    if (event.key === "Escape") goto("/")
   }
 
-  const isGraphTabbable = $derived(page.route.id === "/");
+  const isGraphTabbable = $derived(page.route.id === "/")
 </script>
 
 <svelte:window

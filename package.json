@@ -49,6 +49,7 @@
   },
   "packageManager": "yarn@4.7.0",
   "prettier": {
+    "semi": false,
     "printWidth": 100,
     "tabWidth": 2,
     "plugins": [

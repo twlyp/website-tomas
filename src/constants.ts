@@ -1,4 +1,4 @@
-import * as d3 from "d3";
+import * as d3 from "d3"
 
 export enum PAGES {
   PHOTO = "photo",
@@ -8,7 +8,7 @@ export enum PAGES {
   BIO = "bio",
 }
 
-const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
 
 export const NODES = [
   { page: PAGES.PHOTO, label: "photo", radius: 100 },
@@ -16,7 +16,7 @@ export const NODES = [
   { page: PAGES.EXHIBITIONS, label: "exhibitions", radius: 70 },
   { page: PAGES.MUSIC, label: "music", radius: 60 },
   { page: PAGES.BIO, label: "bio", radius: 50 },
-];
+]
 
 export const COLORS_NODE = {
   [PAGES.PHOTO]: colorScale("0"),
@@ -24,7 +24,7 @@ export const COLORS_NODE = {
   [PAGES.EXHIBITIONS]: colorScale("2"),
   [PAGES.MUSIC]: colorScale("3"),
   [PAGES.BIO]: colorScale("4"),
-};
+}
 
 export const COLORS_PAGES_BACKGROUND = {
   // [PAGES.PHOTO]: "#FFFFFFCC",
@@ -34,12 +34,12 @@ export const COLORS_PAGES_BACKGROUND = {
   [PAGES.MUSIC]: `${COLORS_NODE[PAGES.MUSIC]}AA`,
   [PAGES.EXHIBITIONS]: `${COLORS_NODE[PAGES.EXHIBITIONS]}AA`,
   [PAGES.BIO]: `${COLORS_NODE[PAGES.BIO]}AA`,
-};
+}
 
 export const COLORS_BACKGROUND_GRADIENT = [
   { color: "#FF7F50", opacity: 0.7 },
   { color: "#FF4500", opacity: 0.6 },
   { color: "#FF1493", opacity: 0.5 },
-];
+]
 
-export const NODE_INITIAL_VELOCITY = 50;
+export const NODE_INITIAL_VELOCITY = 50

@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { quadInOut } from "svelte/easing";
-  import { scale } from "svelte/transition";
-  import type { ChildrenProp, HTMLProps } from "$types";
-  import IconCross from "$components/IconCross.svelte";
-  import { goto } from "$app/navigation";
-  import { COLORS_PAGES_BACKGROUND, type PAGES } from "$constants";
+  import { quadInOut } from "svelte/easing"
+  import { scale } from "svelte/transition"
+  import type { ChildrenProp, HTMLProps } from "$types"
+  import IconCross from "$components/IconCross.svelte"
+  import { goto } from "$app/navigation"
+  import { COLORS_PAGES_BACKGROUND, type PAGES } from "$constants"
 
   interface Props extends ChildrenProp, HTMLProps {
-    page?: PAGES;
+    page?: PAGES
   }
 
-  let { class: klass, page, children }: Props = $props();
+  let { class: klass, page, children }: Props = $props()
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->

@@ -1,17 +1,17 @@
 <script lang="ts">
-  import type { ComponentProps } from "svelte";
-  import CardMusic from "./CardMusic.svelte";
-  import EmbedYouTube from "$components/EmbedYouTube.svelte";
-  import EmbedBandcamp from "$components/EmbedBandcamp.svelte";
+  import type { ComponentProps } from "svelte"
+  import CardMusic from "./CardMusic.svelte"
+  import EmbedYouTube from "$components/EmbedYouTube.svelte"
+  import EmbedBandcamp from "$components/EmbedBandcamp.svelte"
 
   interface Props extends Omit<ComponentProps<typeof CardMusic>, "children"> {
-    embedBandcamp?: boolean;
-    embedInstagram?: { imgSrc: string; imgAlt: string; link: string };
-    embedYoutube?: ComponentProps<typeof EmbedYouTube>;
+    embedBandcamp?: boolean
+    embedInstagram?: { imgSrc: string; imgAlt: string; link: string }
+    embedYoutube?: ComponentProps<typeof EmbedYouTube>
   }
 
-  let { embedBandcamp, embedInstagram, embedYoutube, ...cardMusicProps }: Props = $props();
-  let isBio = $derived(!embedBandcamp && !embedInstagram && !embedYoutube);
+  let { embedBandcamp, embedInstagram, embedYoutube, ...cardMusicProps }: Props = $props()
+  let isBio = $derived(!embedBandcamp && !embedInstagram && !embedYoutube)
 </script>
 
 {#if isBio}
