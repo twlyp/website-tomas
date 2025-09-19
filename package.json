@@ -10,7 +10,8 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "test": "vitest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "emulators:start": "firebase emulators:start --import ./emulators_data --export-on-exit"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^6.1.0",
