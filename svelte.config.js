@@ -23,6 +23,7 @@ const config = {
       $types: "./src/types.ts",
       $utils: "./src/utils.ts",
       $firebase: "./src/firebase.ts",
+      $css: "./src/app.css"
     },
     paths: {
       base: process.argv.includes("dev") ? "" : process.env.BASE_PATH,
