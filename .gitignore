@@ -16,6 +16,7 @@ Thumbs.db
 .env.*
 !.env.example
 !.env.test
+!.env.default
 
 # Vite
 vite.config.js.timestamp-*
@@ -25,3 +26,4 @@ vite.config.ts.timestamp-*
 .vscode
 
 firebase-debug.log
+.secrets/
