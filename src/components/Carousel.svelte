@@ -2,7 +2,7 @@
   import { mod } from "$utils";
   import type { Component as ComponentType } from "svelte";
   import { page } from "$app/state";
-  import { swipe, type SwipeCustomEvent } from "svelte-gestures";
+  import { useSwipe, type SwipeCustomEvent } from "svelte-gestures";
 
   interface Props {
     direction: "horizontal" | "vertical";
@@ -57,12 +57,11 @@
 <div
   class="relative h-full w-full overflow-hidden"
   use:focus
-  use:swipe={() => ({ timeframe: 300, minSwipeDistance: 60 })}
   onclick={() => changeSlide(+1)}
   onkeydown={onKeydown}
-  onswipe={onSwipe}
   role="button"
   tabindex="0"
+  {...useSwipe(onSwipe, () => ({ timeframe: 300, minSwipeDistance: 60 }))}
 >
   {#each data as props, idx}
     <Component
