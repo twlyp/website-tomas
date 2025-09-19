@@ -6,6 +6,8 @@
   import { NODES } from "$constants";
   import { goto } from "$app/navigation";
   import { page } from "$app/state";
+  import { FirebaseApp } from "sveltefire";
+  import { auth, firestore, storage } from "$firebase";
 
   let width: number = $state(0);
   let height: number = $state(0);
@@ -34,6 +36,8 @@
   {/if}
 </div>
 
-{@render children()}
+<FirebaseApp {auth} {firestore} {storage}>
+  {@render children()}
+</FirebaseApp>
 
 <style></style>
