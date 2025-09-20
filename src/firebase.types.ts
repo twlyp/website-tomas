@@ -1,4 +1,4 @@
-export type ItemContent = {
+export type ContentItem = {
     title: string
     publication?: string
     location?: string
@@ -7,7 +7,7 @@ export type ItemContent = {
     description?: string
 }
 
-export type ItemPhotos = ItemContent & {
+export type PhotoItem = ContentItem & {
     publication: string
     location: string
     date: string
