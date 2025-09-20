@@ -1,7 +1,8 @@
 <script lang="ts">
   import { FirebaseApp, firekitUser } from "svelte-firekit"
   import { auth } from "$firebase"
-  import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "@firebase/auth"
+  import { onAuthStateChanged } from "@firebase/auth"
+  import LoginLogoutButton from "$components/LoginLogoutButton.svelte"
 
   const user = $derived(firekitUser.user)
 
@@ -22,13 +23,7 @@
 
 <FirebaseApp>
   <header class="flex flex-row items-center p-2">
-    {#if user}
-      <button class="btn btn-primary" onclick={() => signOut(auth)}> sign out </button>
-    {:else}
-      <button class="btn btn-primary" onclick={() => signInWithPopup(auth, new GoogleAuthProvider())}>
-        sign in with google
-      </button>
-    {/if}
+    <LoginLogoutButton {user} />
   </header>
 
   {#if user && isAdmin}
