@@ -29,6 +29,12 @@ const config = {
       base: process.argv.includes("dev") ? "" : process.env.BASE_PATH,
     },
   },
+
+  compilerOptions: {
+    experimental: {
+      async: true
+    }
+  }
 }
 
 export default config
