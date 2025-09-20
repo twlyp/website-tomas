@@ -24,7 +24,7 @@
   onkeydowncapture={onKeydownBackground}
 />
 
-<div class="absolute top-0 left-0 h-screen w-screen overflow-hidden">
+<div class="absolute top-0 left-0 h-screen w-screen overflow-hidden bg-white">
   <Background />
   <BackgroundLogo />
 
@@ -34,9 +34,3 @@
 </div>
 
 {@render children()}
-
-<style>
-  :global(html) {
-    background-color: white;
-  }
-</style>
