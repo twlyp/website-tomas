@@ -1,41 +1,37 @@
 <script lang="ts">
-  import { FirebaseApp } from "sveltefire"
-  import { auth, firestore, storage } from "$firebase"
-  import { userStore, SignedIn, SignedOut } from "sveltefire"
-  import { signInWithPopup, GoogleAuthProvider, signOut, type ParsedToken } from "@firebase/auth"
-  import { derived } from "svelte/store"
+  import { FirebaseApp, firekitAuth, firekitUser } from "svelte-firekit"
+  import { auth } from "$firebase"
+  import { onAuthStateChanged } from "@firebase/auth"
 
-  const user = userStore(auth)
-  const claims = derived<typeof user, ParsedToken | null>(user, ($user, set) => {
-    if ($user) {
-      $user.getIdTokenResult().then((result) => {
-        set(result?.claims)
-      })
+  const user = $derived(firekitUser.user)
+
+  let isAdmin = $state(false)
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      user
+        .getIdTokenResult()
+        .then(({ claims }) => (isAdmin = claims.admin as boolean))
+        .catch(console.error)
     } else {
-      set(null)
+      isAdmin = false
     }
   })
 
   let { children } = $props()
 </script>
 
-<FirebaseApp {auth} {firestore} {storage}>
+<FirebaseApp>
   <header class="flex flex-row items-center p-2">
-    <SignedOut>
-      <button
-        class="btn btn-primary"
-        onclick={() => signInWithPopup(auth, new GoogleAuthProvider())}
-      >
+    {#if user}
+      <button class="btn btn-primary" onclick={() => firekitAuth.signOut()}> sign out </button>
+    {:else}
+      <button class="btn btn-primary" onclick={() => firekitAuth.signInWithGoogle()}>
         sign in with google
       </button>
-    </SignedOut>
-
-    <SignedIn>
-      <button class="btn btn-primary" onclick={() => signOut(auth)}> sign out </button>
-    </SignedIn>
+    {/if}
   </header>
 
-  {#if $claims?.admin}
+  {#if user && isAdmin}
     {@render children()}
   {/if}
 </FirebaseApp>
