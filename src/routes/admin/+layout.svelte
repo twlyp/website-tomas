@@ -1,24 +1,9 @@
 <script lang="ts">
-  import { FirebaseApp, firekitUser } from "svelte-firekit"
-  import { auth } from "$lib/firebase"
-  import { onAuthStateChanged } from "@firebase/auth"
+  import { FirebaseApp } from "svelte-firekit"
   import LoginLogoutButton from "$lib/components/AdminLoginLogoutButton.svelte"
   import { PAGES } from "$lib/constants"
   import { page as sveltePage } from "$app/state"
-
-  const user = $derived(firekitUser.user)
-
-  let isAdmin = $state(false)
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      user
-        .getIdTokenResult()
-        .then(({ claims }) => (isAdmin = claims.admin as boolean))
-        .catch(console.error)
-    } else {
-      isAdmin = false
-    }
-  })
+  import { firebaseUser } from "$lib/firebaseUser.svelte"
 
   const links = [
     { href: "/admin", pageName: "admin home" },
@@ -32,7 +17,7 @@
   <header class="flex flex-row items-center p-2">
     <nav class="navbar bg-base-100 shadow-sm">
       <div class="navbar-start">
-        {#if user && isAdmin}
+        {#if firebaseUser.isAdmin}
           <ul class="flex flex-row gap-3">
             {#each links as { href, pageName }}
               <li>
@@ -45,12 +30,12 @@
         {/if}
       </div>
       <div class="navbar-end">
-        <LoginLogoutButton {user} />
+        <LoginLogoutButton />
       </div>
     </nav>
   </header>
 
-  {#if user && isAdmin}
+  {#if firebaseUser.isAdmin}
     {@render children()}
   {/if}
 </FirebaseApp>
