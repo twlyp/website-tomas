@@ -44,7 +44,8 @@
     "d3": "^7.9.0",
     "d3-force-boundary": "^0.0.3",
     "daisyui": "^5.1.13",
-    "firebase": "^12.3.0"
+    "firebase": "^12.3.0",
+    "uuid": "^13.0.0"
   },
   "packageManager": "yarn@4.7.0",
   "prettier": {
