@@ -9,12 +9,7 @@ import {
 import { firestore } from "$lib/firebase"
 import type { PhotoItem, WithId } from "./types"
 
-const photoCollectionRef = collection(firestore, "photo") as CollectionReference<
-  PhotoItem,
-  PhotoItem
->
-
-class PhotoDb<AppModelType extends DocumentData, DbModelType extends DocumentData> {
+class Db<AppModelType extends DocumentData, DbModelType extends DocumentData> {
   items = $state<WithId<AppModelType>[]>([])
   ref: CollectionReference<AppModelType, DbModelType>
   unsubscribe: Unsubscribe
@@ -40,4 +35,6 @@ class PhotoDb<AppModelType extends DocumentData, DbModelType extends DocumentDat
   }
 }
 
-export const photoDb = new PhotoDb(photoCollectionRef)
+export const photoDb = new Db(
+  collection(firestore, "photo") as CollectionReference<PhotoItem, PhotoItem>,
+)
