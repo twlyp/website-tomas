@@ -2,7 +2,7 @@
   import { FirebaseApp, firekitUser } from "svelte-firekit"
   import { auth } from "$firebase"
   import { onAuthStateChanged } from "@firebase/auth"
-  import LoginLogoutButton from "$components/LoginLogoutButton.svelte"
+  import LoginLogoutButton from "$components/AdminLoginLogoutButton.svelte"
   import { PAGES } from "$constants"
   import { page as sveltePage } from "$app/state"
 
