@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app"
 import { connectAuthEmulator, getAuth } from "firebase/auth"
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore"
-import { connectStorageEmulator, getStorage } from "firebase/storage"
+import { connectStorageEmulator, getStorage, ref as storageRef } from "firebase/storage"
 import {
   PUBLIC_FIREBASE_API_KEY,
   PUBLIC_FIREBASE_APP_ID,
@@ -32,3 +32,5 @@ if (import.meta.env.DEV && PUBLIC_USE_EMULATORS === "true") {
   connectFirestoreEmulator(firestore, "localhost", 8080)
   connectStorageEmulator(storage, "localhost", 9199)
 }
+
+export const getImageRef = (id: string) => storageRef(storage, `images/${id}`)

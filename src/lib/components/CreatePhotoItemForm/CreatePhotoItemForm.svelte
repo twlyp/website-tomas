@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { photoDb, type PhotoItem } from "$lib/db"
-  import type { ChangeEventHandler } from "svelte/elements"
+  import { photoDb, type PhotoItem, type StorageItem } from "$lib/db"
   import InputText from "./InputText.svelte"
   import InputFiles from "./InputFiles.svelte"
 
-  type FormValues = Omit<PhotoItem, "urls"> & { urls: string[] | null }
+  type FormValues = Omit<PhotoItem, "assets"> & { assets: StorageItem[] | null }
 
   const defaultValues: FormValues = {
     title: "",
@@ -12,7 +11,7 @@
     location: "",
     date: "",
     description: "",
-    urls: [],
+    assets: null,
   }
 
   let values: FormValues = $state(defaultValues)
@@ -21,8 +20,8 @@
   }
 
   function validate(values: FormValues) {
-    if (!values.urls || values.urls.length === 0) {
-      console.error("no urls")
+    if (!values.assets || values.assets.length === 0) {
+      console.error("no assets")
     }
     return values as PhotoItem
   }
@@ -34,13 +33,13 @@
   }
 </script>
 
-<form onsubmit={onSubmit} class="flex max-w-xs flex-col gap-1">
+<form onsubmit={onSubmit} class="flex max-w-xs flex-col gap-1 mb-10">
   <InputText name="title" bind:value={values.title} />
   <InputText name="publication" bind:value={values.publication} />
   <InputText name="location" bind:value={values.location} />
   <InputText name="date" bind:value={values.date} />
 
-  <InputFiles bind:urls={values.urls} />
+  <InputFiles bind:storageItems={values.assets} />
 
   <button type="submit" class="btn btn-primary">submit</button>
 </form>
