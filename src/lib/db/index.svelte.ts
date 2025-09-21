@@ -11,7 +11,7 @@ import {
 import { firestore } from "$lib/firebase"
 import type { PhotoItem, WithId } from "./types"
 
-class Db<AppModelType extends DocumentData, DbModelType extends DocumentData> {
+export class Db<AppModelType extends DocumentData, DbModelType extends DocumentData> {
   items = $state<WithId<AppModelType>[]>([])
   ref: CollectionReference<AppModelType, DbModelType>
   unsubscribe: Unsubscribe
