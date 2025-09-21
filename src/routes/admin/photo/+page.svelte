@@ -1,8 +1,8 @@
 <script lang="ts">
-  import AdminCreatePhotoItemForm from "$lib/components/AdminCreatePhotoItemForm.svelte"
+  import CreatePhotoItemForm from "$lib/components/CreatePhotoItemForm"
   import { photoDb } from "$lib/db"
 </script>
 
 {JSON.stringify(photoDb.items)}
 
-<AdminCreatePhotoItemForm />
+<CreatePhotoItemForm />
