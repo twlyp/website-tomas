@@ -32,15 +32,17 @@
   <header class="flex flex-row items-center p-2">
     <nav class="navbar bg-base-100 shadow-sm">
       <div class="navbar-start">
-        <ul class="flex flex-row gap-3">
-          {#each links as { href, pageName }}
-            <li>
-              <a {href} class="link link-hover {sveltePage.route.id === href ? 'font-bold' : ''}">
-                {pageName}
-              </a>
-            </li>
-          {/each}
-        </ul>
+        {#if user && isAdmin}
+          <ul class="flex flex-row gap-3">
+            {#each links as { href, pageName }}
+              <li>
+                <a {href} class="link link-hover {sveltePage.route.id === href ? 'font-bold' : ''}">
+                  {pageName}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        {/if}
       </div>
       <div class="navbar-end">
         <LoginLogoutButton {user} />
