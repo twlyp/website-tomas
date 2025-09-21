@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ChildrenProp, HTMLProps } from "$types"
+  import type { ChildrenProp, HTMLProps } from "$lib/types"
 
   interface Props extends ChildrenProp, HTMLProps {
     title: string

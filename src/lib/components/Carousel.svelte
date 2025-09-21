@@ -1,5 +1,5 @@
 <script lang="ts" generics="T">
-  import { mod } from "$utils"
+  import { mod } from "$lib/utils"
   import type { Component as ComponentType } from "svelte"
   import { page } from "$app/state"
   import { useSwipe, type SwipeCustomEvent } from "svelte-gestures"

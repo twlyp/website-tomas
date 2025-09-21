@@ -1,6 +1,6 @@
 <script lang="ts">
-  import YouTube from "$components/EmbedYouTube.svelte"
-  import type { HTMLProps } from "$types"
+  import YouTube from "$lib/components/EmbedYouTube.svelte"
+  import type { HTMLProps } from "$lib/types"
   interface Props extends HTMLProps {
     title: string
     videoId: string

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { type UserProfile } from "svelte-firekit"
-  import { auth } from "$firebase"
+  import { auth } from "$lib/firebase"
   import { GoogleAuthProvider, signInWithPopup, signOut } from "@firebase/auth"
 
   type Props = {

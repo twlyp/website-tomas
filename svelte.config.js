@@ -17,12 +17,6 @@ const config = {
       strict: true,
     }),
     alias: {
-      $components: "./src/components",
-      $constants: "./src/constants.ts",
-      $stores: "./src/stores.ts",
-      $types: "./src/types.ts",
-      $utils: "./src/utils.ts",
-      $firebase: "./src/firebase.ts",
       $css: "./src/app.css",
     },
     paths: {

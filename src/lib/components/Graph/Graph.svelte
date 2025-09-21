@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte"
-  import { COLORS_NODE } from "$constants"
+  import { COLORS_NODE } from "$lib/constants"
   import { type NodeDatum, randomizeNodes, startSimulation } from "./dragSimulation"
 
   interface Props {

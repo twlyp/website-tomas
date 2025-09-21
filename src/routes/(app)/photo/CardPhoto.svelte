@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { HTMLProps } from "$types"
+  import type { HTMLProps } from "$lib/types"
 
   export interface Props {
     date: string

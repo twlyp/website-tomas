@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { ComponentProps } from "svelte"
   import CardMusic from "./CardMusic.svelte"
-  import EmbedYouTube from "$components/EmbedYouTube.svelte"
-  import EmbedBandcamp from "$components/EmbedBandcamp.svelte"
+  import EmbedYouTube from "$lib/components/EmbedYouTube.svelte"
+  import EmbedBandcamp from "$lib/components/EmbedBandcamp.svelte"
 
   interface Props extends Omit<ComponentProps<typeof CardMusic>, "children"> {
     embedBandcamp?: boolean

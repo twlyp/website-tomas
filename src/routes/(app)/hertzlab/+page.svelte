@@ -2,7 +2,7 @@
   import type { ComponentProps } from "svelte"
   import CardMusicWrapper from "../music/CardMusicWrapper.svelte"
   import aunoEvaluacion from "$lib/music/auno-evaluacion.webp"
-  import PageSection from "$components/PageSection.svelte"
+  import PageSection from "$lib/components/PageSection.svelte"
 
   const data: Array<ComponentProps<typeof CardMusicWrapper>> = [
     {

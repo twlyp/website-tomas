@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { PAGES } from "$constants"
-  import PageSection from "$components/PageSection.svelte"
+  import { PAGES } from "$lib/constants"
+  import PageSection from "$lib/components/PageSection.svelte"
   import aunoTreadmill from "$lib/music/auno-treadmill.webp"
   import aunoEvaluacion from "$lib/music/auno-evaluacion.webp"
-  import Carousel from "$components/Carousel.svelte"
+  import Carousel from "$lib/components/Carousel.svelte"
   import CardMusicWrapper from "./CardMusicWrapper.svelte"
   import type { ComponentProps } from "svelte"
 

@@ -1,5 +1,5 @@
 <script>
-  import PageSection from "$components/PageSection.svelte"
+  import PageSection from "$lib/components/PageSection.svelte"
 </script>
 
 <PageSection>

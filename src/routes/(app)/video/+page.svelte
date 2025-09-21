@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Carousel from "$components/Carousel.svelte"
-  import PageSection from "$components/PageSection.svelte"
-  import { PAGES } from "$constants"
+  import Carousel from "$lib/components/Carousel.svelte"
+  import PageSection from "$lib/components/PageSection.svelte"
+  import { PAGES } from "$lib/constants"
   import CardVideo from "./CardVideo.svelte"
 
   const videos = [

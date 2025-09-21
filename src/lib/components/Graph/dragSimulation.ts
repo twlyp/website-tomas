@@ -1,8 +1,8 @@
 import * as d3 from "d3"
-import { NODE_INITIAL_VELOCITY, type PAGES } from "$constants"
+import { NODE_INITIAL_VELOCITY, type PAGES } from "$lib/constants"
 // @ts-expect-error - d3-force-boundary is not typed
 import forceBoundary from "d3-force-boundary"
-import { bindToInterval } from "$utils"
+import { bindToInterval } from "$lib/utils"
 
 export interface NodeDatum extends d3.SimulationNodeDatum {
   page: PAGES

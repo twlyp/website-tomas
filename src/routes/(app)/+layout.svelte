@@ -1,8 +1,8 @@
 <script lang="ts">
-  import Background from "$components/Background.svelte"
-  import BackgroundLogo from "$components/BackgroundLogo.svelte"
-  import Graph from "$components/Graph"
-  import { NODES } from "$constants"
+  import Background from "$lib/components/Background.svelte"
+  import BackgroundLogo from "$lib/components/BackgroundLogo.svelte"
+  import Graph from "$lib/components/Graph"
+  import { NODES } from "$lib/constants"
   import { goto } from "$app/navigation"
   import { page } from "$app/state"
 

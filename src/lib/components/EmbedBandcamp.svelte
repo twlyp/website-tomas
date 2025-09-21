@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { COLORS_PAGES_BACKGROUND, PAGES } from "$constants"
-  import type { HTMLProps } from "$types"
+  import { COLORS_PAGES_BACKGROUND, PAGES } from "$lib/constants"
+  import type { HTMLProps } from "$lib/types"
 
   interface Props extends HTMLProps {
     width?: number

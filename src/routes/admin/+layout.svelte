@@ -1,9 +1,9 @@
 <script lang="ts">
   import { FirebaseApp, firekitUser } from "svelte-firekit"
-  import { auth } from "$firebase"
+  import { auth } from "$lib/firebase"
   import { onAuthStateChanged } from "@firebase/auth"
-  import LoginLogoutButton from "$components/AdminLoginLogoutButton.svelte"
-  import { PAGES } from "$constants"
+  import LoginLogoutButton from "$lib/components/AdminLoginLogoutButton.svelte"
+  import { PAGES } from "$lib/constants"
   import { page as sveltePage } from "$app/state"
 
   const user = $derived(firekitUser.user)

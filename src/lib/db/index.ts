@@ -1,6 +1,6 @@
 import { collection, addDoc } from "firebase/firestore"
-import { firestore } from "$firebase"
-import type { PhotoItem } from "../firebase.types"
+import { firestore } from "$lib/firebase"
+import type { PhotoItem } from "$lib/firebase.types"
 
 export const photoCollectionRef = collection(firestore, "photo")
 
