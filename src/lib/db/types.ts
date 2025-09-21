@@ -13,3 +13,5 @@ export type PhotoItem = ContentItem & {
     date: string
     urls: string[]
 }
+
+export type WithId<T> = T & { id: string }

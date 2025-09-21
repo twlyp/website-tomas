@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { addPhotoItem, type PhotoItem } from "$lib/db"
+  import { photoDb, type PhotoItem } from "$lib/db"
 
   const defaultValues: PhotoItem = {
     title: "",
@@ -11,11 +11,13 @@
   }
 
   let values: PhotoItem = $state(defaultValues)
+  function reset() {
+    values = { ...defaultValues }
+  }
 
   async function onSubmit() {
-    console.log("values", values)
-    const result = await addPhotoItem(values)
-    values = { ...defaultValues }
+    await photoDb.add(values)
+    reset()
   }
 </script>
 
