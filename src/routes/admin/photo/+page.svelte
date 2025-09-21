@@ -23,7 +23,7 @@
         <td>{item.publication}</td>
         <td>{item.location}</td>
         <td>{item.date}</td>
-        <td>{item.urls}</td>
+        <td>{item.assets?.map((a) => a.url).join(", ")}</td>
         <td>
           <button class="btn btn-circle btn-ghost" onclick={() => photoDb.delete(item.id)}>
             <TrashIcon />
