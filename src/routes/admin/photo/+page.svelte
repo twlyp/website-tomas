@@ -1,6 +1,7 @@
 <script lang="ts">
   import CreatePhotoItemForm from "$lib/components/CreatePhotoItemForm"
   import { photoDb } from "$lib/db"
+  import TrashIcon from "$lib/components/icons/TrashIcon.svelte"
 </script>
 
 <table class="table">
@@ -23,6 +24,11 @@
         <td>{item.location}</td>
         <td>{item.date}</td>
         <td>{item.urls}</td>
+        <td>
+          <button class="btn btn-circle btn-ghost" onclick={() => photoDb.delete(item.id)}>
+            <TrashIcon />
+          </button>
+        </td>
       </tr>
     {/each}
   </tbody>

@@ -5,6 +5,8 @@ import {
   onSnapshot,
   type DocumentData,
   type Unsubscribe,
+  deleteDoc,
+  doc,
 } from "firebase/firestore"
 import { firestore } from "$lib/firebase"
 import type { PhotoItem, WithId } from "./types"
@@ -29,6 +31,14 @@ class Db<AppModelType extends DocumentData, DbModelType extends DocumentData> {
   async add(item: AppModelType) {
     try {
       await addDoc(this.ref, item)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  async delete(id: string) {
+    try {
+      await deleteDoc(doc(this.ref, id))
     } catch (e) {
       console.error(e)
     }
