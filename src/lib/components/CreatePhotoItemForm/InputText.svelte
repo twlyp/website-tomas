@@ -4,5 +4,5 @@
 
 <label class="floating-label">
   <span>{name}</span>
-  <input type="text" bind:value placeholder={name} class="input input-md" required />
+  <input type="text" bind:value placeholder={name} class="validator input input-md" required />
 </label>
