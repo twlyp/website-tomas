@@ -1,6 +1,5 @@
 <script lang="ts">
-  import type { PhotoItem } from "$lib/firebase.types"
-  import { addPhotoItem } from "$lib/db"
+  import { addPhotoItem, type PhotoItem } from "$lib/db"
 
   const defaultValues: PhotoItem = {
     title: "",
