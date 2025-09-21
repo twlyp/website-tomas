@@ -1,5 +1,6 @@
 <script lang="ts">
   import { photoDb, type PhotoItem } from "$lib/db"
+  import InputText from "./InputText.svelte"
 
   const defaultValues: PhotoItem = {
     title: "",
@@ -22,45 +23,10 @@
 </script>
 
 <form onsubmit={onSubmit}>
-  <label class="floating-label">
-    <span>title</span>
-    <input
-      type="text"
-      bind:value={values.title}
-      placeholder="title"
-      class="input input-md"
-      required
-    />
-  </label>
-  <label class="floating-label">
-    <span>publication</span>
-    <input
-      type="text"
-      bind:value={values.publication}
-      placeholder="publication"
-      class="input input-md"
-      required
-    />
-  </label>
-  <label class="floating-label">
-    <span>location</span>
-    <input
-      type="text"
-      bind:value={values.location}
-      placeholder="location"
-      class="input input-md"
-      required
-    />
-  </label>
-  <label class="floating-label">
-    <span>date</span>
-    <input
-      type="text"
-      bind:value={values.date}
-      placeholder="date"
-      class="input input-md"
-      required
-    />
-  </label>
+  <InputText name="title" bind:value={values.title} />
+  <InputText name="publication" bind:value={values.publication} />
+  <InputText name="location" bind:value={values.location} />
+  <InputText name="date" bind:value={values.date} />
+
   <button type="submit" class="btn btn-primary">submit</button>
 </form>
