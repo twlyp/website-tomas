@@ -1,6 +1,6 @@
 <script lang="ts">
   import CreatePhotoItemForm from "$lib/components/CreatePhotoItemForm"
-  import { photoCollection, type Collection, type PhotoItem, type WithId } from "$lib/db"
+  import { photoCollection, type PhotoItem, type WithId } from "$lib/db"
   import TrashIcon from "$lib/components/icons/TrashIcon.svelte"
   import { deleteObject, ref as storageRef } from "firebase/storage"
   import { storage } from "$lib/firebase"
