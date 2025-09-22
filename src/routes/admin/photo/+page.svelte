@@ -1,6 +1,6 @@
 <script lang="ts">
   import CreatePhotoItemForm from "$lib/components/CreatePhotoItemForm"
-  import { photoDb, type Db, type PhotoItem, type WithId } from "$lib/db"
+  import { photoCollection, type Collection, type PhotoItem, type WithId } from "$lib/db"
   import TrashIcon from "$lib/components/icons/TrashIcon.svelte"
   import { deleteObject, ref as storageRef } from "firebase/storage"
   import { storage } from "$lib/firebase"
@@ -9,7 +9,7 @@
     try {
       await Promise.all([
         ...(item.assets?.map((a) => deleteObject(storageRef(storage, a.path))) ?? []),
-        photoDb.delete(item.id),
+        photoCollection.delete(item.id),
       ])
       console.log(`deleted entry ${item.id} from photoDb`)
     } catch {}
@@ -28,7 +28,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each photoDb.items as item}
+    {#each photoCollection.items as item}
       <tr>
         <td>{item.id}</td>
         <td>{item.title}</td>

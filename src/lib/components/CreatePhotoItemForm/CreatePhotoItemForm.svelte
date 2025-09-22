@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { photoDb, type PhotoItem, type StorageItem } from "$lib/db"
+  import { photoCollection, type PhotoItem, type StorageItem } from "$lib/db"
   import InputText from "./InputText.svelte"
   import InputFiles from "./InputFiles.svelte"
 
@@ -28,7 +28,7 @@
 
   async function onSubmit() {
     const item = validate(values)
-    await photoDb.add(item)
+    await photoCollection.add(item)
     reset()
   }
 </script>
