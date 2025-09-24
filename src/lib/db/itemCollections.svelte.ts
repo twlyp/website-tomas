@@ -11,7 +11,7 @@ import {
 import { firestore } from "$lib/firebase"
 import type { PhotoItem, WithId } from "./types"
 
-export class Collection<AppModelType extends DocumentData, DbModelType extends DocumentData> {
+export class ItemCollection<AppModelType extends DocumentData, DbModelType extends DocumentData> {
   items = $state<WithId<AppModelType>[]>([])
   ref: CollectionReference<AppModelType, DbModelType>
   unsubscribe: Unsubscribe
@@ -45,6 +45,6 @@ export class Collection<AppModelType extends DocumentData, DbModelType extends D
   }
 }
 
-export const photoCollection = new Collection(
+export const photoCollection = new ItemCollection(
   collection(firestore, "photo") as CollectionReference<PhotoItem, PhotoItem>,
 )
