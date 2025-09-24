@@ -7,7 +7,7 @@ export function opacityToHex(opacity: number) {
     .padStart(2, "0")
 }
 
-export function bindToInterval(min: number, max: number, value: number) {
+export function bindToInterval([min, max]: readonly [min: number, max: number], value: number) {
   return Math.min(Math.max(min, value), max)
 }
 

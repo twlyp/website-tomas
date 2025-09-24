@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import { COLORS_NODE } from "$lib/constants"
-  import { type NodeDatum, randomizeNodes, startSimulation } from "./dragSimulation"
+  import { randomizeNodes, } from "./dragSimulation"
+  import { Simulation, type NodeDatum } from "./Simulation.svelte"
 
   interface Props {
     nodes: NodeDatum[]
@@ -15,19 +16,11 @@
 
   let svg: SVGSVGElement
 
-  let nodes = $state(randomizeNodes(inputNodes, width, height))
+  const simulation = new Simulation(randomizeNodes(inputNodes, width, height), width, height)
 
-  onMount(() =>
-    startSimulation({
-      nodes,
-      width,
-      height,
-      svg,
-      refreshNodes: () => {
-        nodes = [...nodes]
-      },
-    }),
-  )
+  onMount(() => {
+    simulation.initDrag(svg)
+  })
 </script>
 
 <svg
@@ -38,7 +31,7 @@
   class="absolute top-0 left-0"
 >
   <g id="graph" role="navigation">
-    {#each nodes as node}
+    {#each simulation.nodes as node}
       <a href={`/${node.page}`} tabindex={tabIndex}>
         <g class="node-group">
           <circle
