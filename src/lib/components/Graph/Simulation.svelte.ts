@@ -43,7 +43,6 @@ export class Simulation {
     this.nodes = nodes
     this.width = width
     this.height = height
-    console.log("xRange", this.xRange, "yRange", this.yRange, "boundary", this.boundary)
     this.startSimulation()
   }
 
@@ -87,5 +86,16 @@ export class Simulation {
       .on("drag", this.dragged)
       .on("end", this.dragEnded)
     d3.select<SVGSVGElement, NodeDatum>(svg).call(this.dragBehavior)
+  }
+
+  setSize(width: number, height: number) {
+    this.width = width
+    this.height = height
+    this.simulation.force("boundary", forceBoundary(...this.boundary).strength(STRENGTH_BOUNDARY))
+    this.dragged = (event: DragEvent) => {
+      event.subject.fx = bindToInterval(this.xRange, event.x)
+      event.subject.fy = bindToInterval(this.yRange, event.y)
+    }
+    this.simulation.restart()
   }
 }

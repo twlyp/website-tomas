@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import { COLORS_NODE } from "$lib/constants"
-  import { randomizeNodes, } from "./dragSimulation"
+  import { randomizeNodes } from "./dragSimulation"
   import { Simulation, type NodeDatum } from "./Simulation.svelte"
 
   interface Props {
@@ -22,6 +22,8 @@
     simulation.initDrag(svg)
   })
 </script>
+
+<svelte:window onresize={() => simulation.setSize(width, height)} />
 
 <svg
   bind:this={svg}
