@@ -1,9 +1,9 @@
 <script lang="ts">
-  import logo from "$lib/logo_tomas.png"
+  import logoSober from "$lib/tomeyza_logo_sober.webp"
 </script>
 
 <img
-  alt="Tom Eyzaguirre's logo"
-  src={logo}
+  src={logoSober}
+  alt="Tomeyza's logo"
   class="absolute top-1/2 left-1/2 -translate-1/2 p-5 opacity-60"
 />
