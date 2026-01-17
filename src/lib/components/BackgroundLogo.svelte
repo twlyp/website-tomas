@@ -5,5 +5,5 @@
 <img
   src={logoSober}
   alt="Tomeyza's logo"
-  class="absolute top-1/2 left-1/2 -translate-1/2 p-5 opacity-60"
+  class="absolute top-1/2 left-1/2 w-screen max-w-96 -translate-1/2 p-5 opacity-60"
 />
