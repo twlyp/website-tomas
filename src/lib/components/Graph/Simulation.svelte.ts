@@ -7,11 +7,13 @@ import { getRadius } from "$lib/nodeTree"
 
 type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>
 
+const STRENGTH_CHARGE = 0.01
 const STRENGTH_BOUNDARY = 0.002
+const STRENGHT_COLLIDE = 0.1
 const STRENGTH_LINK = 0.01
-const DECAY_ALPHA = 0.02
-const DECAY_VELOCITY = 0.02
-const TARGET_ALPHA = 0.2
+const DECAY_ALPHA = 0.01
+const DECAY_VELOCITY = 0.04
+const TARGET_ALPHA = 0.02
 
 export class Simulation {
   private simulation!: d3.Simulation<NodeDatum, LinkDatum>
@@ -45,13 +47,13 @@ export class Simulation {
   }
 
   setForceCharge() {
-    this.simulation.force("charge", d3.forceManyBody())
+    this.simulation.force("charge", d3.forceManyBody().strength(STRENGTH_CHARGE))
   }
 
   setForceCollide() {
     this.simulation.force(
       "collide",
-      d3.forceCollide((d) => getRadius(d.layer)),
+      d3.forceCollide<NodeDatum>((d) => 1.1 * getRadius(d.layer)).strength(STRENGHT_COLLIDE),
     )
   }
 
@@ -110,6 +112,33 @@ export class Simulation {
   addNode(currentNode: NodeDatum, newNode: NodeDatum) {
     this.nodes = [...this.nodes, newNode]
     this.links = [...this.links, { source: currentNode.index!, target: this.nodes.length - 1 }]
+    this.simulation.nodes(this.nodes)
+    this.setForceLink()
+  }
+
+  addChildren(node: NodeDatum) {
+    if (!node.children) return
+    const radius = 2 * (getRadius(node.layer) + getRadius(node.layer + 1)) + 10
+    const nSteps = node.children.length
+    const children = node.children.map((child, i) => {
+      const x = node.x! + radius * Math.cos(((2 * Math.PI) / nSteps) * i)
+      const y = node.y! + radius * Math.sin(((2 * Math.PI) / nSteps) * i)
+      const v = -1
+      return {
+        ...child,
+        layer: node.layer + 1,
+        x,
+        y,
+        vx: x + v * Math.cos(((2 * Math.PI) / nSteps) * i),
+        vy: y + v * Math.sin(((2 * Math.PI) / nSteps) * i),
+      }
+    })
+    const nNodes = this.nodes.length
+    this.nodes = [...this.nodes, ...children]
+    this.links = [
+      ...this.links,
+      ...children.map((_, i) => ({ source: node.index!, target: nNodes + i })),
+    ]
     this.simulation.nodes(this.nodes)
     this.setForceLink()
   }

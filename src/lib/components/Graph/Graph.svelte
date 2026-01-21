@@ -39,9 +39,7 @@
       if (node.isOpen) {
         node.children.forEach((child) => simulation.removeNode(child.label))
       } else {
-        node.children.forEach((child) =>
-          simulation.addNode(node, { ...child, layer: node.layer + 1 }),
-        )
+        simulation.addChildren(node)
       }
       node.isOpen = !node.isOpen
     } else {
