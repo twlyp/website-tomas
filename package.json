@@ -42,7 +42,6 @@
     "d3": "^7.9.0",
     "d3-force-boundary": "^0.0.3",
     "daisyui": "^5.5.14",
-    "firebase": "^12.8.0",
     "uuid": "^13.0.0"
   },
   "packageManager": "yarn@4.7.0",
