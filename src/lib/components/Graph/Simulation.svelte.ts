@@ -13,6 +13,7 @@ export type LinkDatum = d3.SimulationLinkDatum<NodeDatum>
 type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>
 
 const STRENGTH_BOUNDARY = 0.002
+const STRENGTH_LINK = 0.01
 const DECAY_ALPHA = 0.02
 const DECAY_VELOCITY = 0.02
 const TARGET_ALPHA = 0.2
@@ -22,6 +23,7 @@ export class Simulation {
   private width = $state<number>(0)
   private height = $state<number>(0)
   nodes = $state<NodeDatum[]>([])
+  links = $state<LinkDatum[]>([{ source: 0, target: 1 }])
   dragBehavior?: d3.DragBehavior<SVGSVGElement, NodeDatum, NodeDatum | undefined>
   dragSubject!: (event: DragEvent) => NodeDatum | undefined
   dragStarted!: (event: DragEvent) => void
@@ -47,19 +49,37 @@ export class Simulation {
     this.startSimulation()
   }
 
+  setForceCharge() {
+    this.simulation.force("charge", d3.forceManyBody())
+  }
+
+  setForceCollide() {
+    this.simulation.force(
+      "collide",
+      d3.forceCollide((d) => d.radius),
+    )
+  }
+
+  setForceBoundary() {
+    this.simulation.force("boundary", forceBoundary(...this.boundary).strength(STRENGTH_BOUNDARY))
+  }
+
+  setForceLink()  {
+    this.simulation.force("link", d3.forceLink<NodeDatum, LinkDatum>(this.links).strength(STRENGTH_LINK))
+  }
+
   startSimulation() {
     this.simulation = d3
       .forceSimulation<NodeDatum, LinkDatum>(this.nodes)
       .alphaDecay(DECAY_ALPHA)
       .velocityDecay(DECAY_VELOCITY)
       .alphaTarget(TARGET_ALPHA)
-      .force("charge", d3.forceManyBody())
-      .force(
-        "collide",
-        d3.forceCollide((d) => d.radius),
-      )
-      .force("boundary", forceBoundary(...this.boundary).strength(STRENGTH_BOUNDARY))
       .on("tick", () => this.simulation.tick())
+
+    this.setForceCharge()
+    this.setForceCollide()
+    this.setForceBoundary()
+    this.setForceLink()
 
     this.dragSubject = (event: DragEvent) => this.simulation.find(event.x, event.y)
     this.dragStarted = (event: DragEvent) => {
@@ -87,5 +107,12 @@ export class Simulation {
       .on("drag", this.dragged)
       .on("end", this.dragEnded)
     d3.select<SVGSVGElement, NodeDatum>(svg).call(this.dragBehavior)
+  }
+
+  addNode(currentNode: NodeDatum, newNode: NodeDatum) {
+    this.nodes = [...this.nodes, newNode]
+    this.links = [...this.links, { source: currentNode.index!, target: this.nodes.length - 1 }]
+    this.simulation.nodes(this.nodes)
+    this.setForceLink()
   }
 }
