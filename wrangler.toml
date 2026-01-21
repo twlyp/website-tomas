@@ -6,3 +6,8 @@ assets = { directory = ".svelte-kit/cloudflare", binding = "ASSETS" }
 
 [build]
 command = "bun run build"
+
+[observability]
+[observability.logs]
+enabled = true
+invocation_logs = true
