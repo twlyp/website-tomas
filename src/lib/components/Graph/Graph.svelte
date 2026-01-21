@@ -33,6 +33,21 @@
   onMount(() => {
     simulation.initDrag(svg)
   })
+
+  function onNodeClick(node: NodeDatum) {
+    if (node.children) {
+      if (node.isOpen) {
+        node.children.forEach((child) => simulation.removeNode(child.label))
+      } else {
+        node.children.forEach((child) =>
+          simulation.addNode(node, { ...child, layer: node.layer + 1 }),
+        )
+      }
+      node.isOpen = !node.isOpen
+    } else {
+      console.log("node.slug")
+    }
+  }
 </script>
 
 <svg
@@ -48,19 +63,10 @@
         class="node-group"
         role="button"
         tabindex={tabIndex}
-        onclick={() => {
-          if (node.children) {
-            if (node.isOpen) {
-              node.children.forEach((child) => simulation.removeNode(child.label))
-            } else {
-              node.children.forEach((child) =>
-                simulation.addNode(node, { ...child, layer: node.layer + 1 }),
-              )
-            }
-            node.isOpen = !node.isOpen
-          }
+        onclick={() => onNodeClick(node)}
+        onkeydown={(ev) => {
+          ev.key === "Enter" && onNodeClick(node)
         }}
-        onkeydown={() => {}}
       >
         <circle
           class="node"

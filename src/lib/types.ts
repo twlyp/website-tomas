@@ -1,4 +1,5 @@
 import type { Snippet } from "svelte"
+import type { TreeNode } from "./nodeTree"
 
 export interface ChildrenProp {
   children: Snippet
@@ -10,11 +11,9 @@ export interface HTMLProps {
   style?: string
 }
 
-export interface NodeDatum extends d3.SimulationNodeDatum {
-  label: string
-  layer: number
-  children?: NodeDatum[]
-  isOpen?: boolean
-}
+export type NodeDatum = d3.SimulationNodeDatum &
+  TreeNode & {
+    layer: number
+  }
 
 export type LinkDatum = d3.SimulationLinkDatum<NodeDatum>
