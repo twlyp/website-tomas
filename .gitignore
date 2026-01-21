@@ -25,7 +25,4 @@ vite.config.ts.timestamp-*
 # VSCode
 .vscode
 
-firebase-debug.log
-firestore-debug.log
-emulators_data/
-.secrets/
+.werangler/

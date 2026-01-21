@@ -1,1 +1,0 @@
-Set env var FIREBASE_AUTH_EMULATOR_HOST="127.0.0.1:9099" to connect to emulators.

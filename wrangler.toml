@@ -1,0 +1,8 @@
+name = "tomeyza-web"
+main = ".svelte-kit/cloudflare/_worker.js"
+compatibility_date = "2025-12-31"
+workers_dev = true
+assets = { directory = ".svelte-kit/cloudflare", binding = "ASSETS" }
+
+[build]
+command = "bun run build"
