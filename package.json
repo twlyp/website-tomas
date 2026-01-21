@@ -41,8 +41,7 @@
     "@types/d3": "^7.4.3",
     "d3": "^7.9.0",
     "d3-force-boundary": "^0.0.3",
-    "daisyui": "^5.5.14",
-    "uuid": "^13.0.0"
+    "daisyui": "^5.5.14"
   },
   "packageManager": "yarn@4.7.0",
   "prettier": {
