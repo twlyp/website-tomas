@@ -42,5 +42,3 @@ export const COLORS_BACKGROUND_GRADIENT = [
   { color: "#FF4500", opacity: 0.6 },
   { color: "#FF1493", opacity: 0.5 },
 ]
-
-export const NODE_INITIAL_VELOCITY = 50

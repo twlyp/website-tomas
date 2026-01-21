@@ -1,22 +1,26 @@
 <script lang="ts">
   import { onMount } from "svelte"
-  import { COLORS_NODE } from "$lib/constants"
-  import { randomizeNodes, } from "./dragSimulation"
+  import { COLORS_NODE, NODES } from "$lib/constants"
   import { Simulation, type NodeDatum } from "./Simulation.svelte"
 
   interface Props {
-    nodes: NodeDatum[]
     width: number
     height: number
     isTabbable?: boolean
   }
 
-  let { nodes: inputNodes, width, height, isTabbable = true }: Props = $props()
+  let { width, height, isTabbable = true }: Props = $props()
   let tabIndex = $derived(isTabbable ? 0 : -1)
 
   let svg: SVGSVGElement
 
-  const simulation = new Simulation(randomizeNodes(inputNodes, width, height), width, height)
+  const simulation = new Simulation(
+    NODES.map((node) => ({ ...node, x: 0, y: 0, vx: 0, vy: 0 })),
+    // svelte-ignore state_referenced_locally
+    width,
+    // svelte-ignore state_referenced_locally
+    height,
+  )
 
   onMount(() => {
     simulation.initDrag(svg)

@@ -4,7 +4,6 @@
   import Background from "$lib/components/Background.svelte"
   import BackgroundLogo from "$lib/components/BackgroundLogo.svelte"
   import Graph from "$lib/components/Graph"
-  import { NODES } from "$lib/constants"
   import { goto } from "$app/navigation"
   import { page } from "$app/state"
 
@@ -31,7 +30,11 @@
   <BackgroundLogo />
 
   {#if width && height}
-    <Graph {width} {height} nodes={NODES} isTabbable={isGraphTabbable} />
+    <Graph
+      {width}
+      {height}
+      isTabbable={isGraphTabbable}
+    />
   {/if}
 </div>
 
