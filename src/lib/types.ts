@@ -9,3 +9,12 @@ export interface HTMLProps {
   id?: string
   style?: string
 }
+
+export interface NodeDatum extends d3.SimulationNodeDatum {
+  label: string
+  layer: number
+  children?: NodeDatum[]
+  isOpen?: boolean
+}
+
+export type LinkDatum = d3.SimulationLinkDatum<NodeDatum>

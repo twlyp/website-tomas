@@ -1,15 +1,10 @@
 import * as d3 from "d3"
-import { type PAGES } from "$lib/constants"
 // @ts-expect-error - d3-force-boundary is not typed
 import forceBoundary from "d3-force-boundary"
 import { bindToInterval } from "$lib/utils"
+import type { NodeDatum, LinkDatum } from "$lib/types"
+import { getRadius } from "$lib/nodeTree"
 
-export interface NodeDatum extends d3.SimulationNodeDatum {
-  page: PAGES
-  label: string
-  radius: number
-}
-export type LinkDatum = d3.SimulationLinkDatum<NodeDatum>
 type DragEvent = d3.D3DragEvent<SVGCircleElement, NodeDatum, NodeDatum>
 
 const STRENGTH_BOUNDARY = 0.002
@@ -23,7 +18,7 @@ export class Simulation {
   private width = $state<number>(0)
   private height = $state<number>(0)
   nodes = $state<NodeDatum[]>([])
-  links = $state<LinkDatum[]>([{ source: 0, target: 1 }])
+  links = $state<LinkDatum[]>([])
   dragBehavior?: d3.DragBehavior<SVGSVGElement, NodeDatum, NodeDatum | undefined>
   dragSubject!: (event: DragEvent) => NodeDatum | undefined
   dragStarted!: (event: DragEvent) => void
@@ -56,7 +51,7 @@ export class Simulation {
   setForceCollide() {
     this.simulation.force(
       "collide",
-      d3.forceCollide((d) => d.radius),
+      d3.forceCollide((d) => getRadius(d.layer)),
     )
   }
 
@@ -64,8 +59,11 @@ export class Simulation {
     this.simulation.force("boundary", forceBoundary(...this.boundary).strength(STRENGTH_BOUNDARY))
   }
 
-  setForceLink()  {
-    this.simulation.force("link", d3.forceLink<NodeDatum, LinkDatum>(this.links).strength(STRENGTH_LINK))
+  setForceLink() {
+    this.simulation.force(
+      "link",
+      d3.forceLink<NodeDatum, LinkDatum>(this.links).strength(STRENGTH_LINK),
+    )
   }
 
   startSimulation() {
@@ -112,6 +110,15 @@ export class Simulation {
   addNode(currentNode: NodeDatum, newNode: NodeDatum) {
     this.nodes = [...this.nodes, newNode]
     this.links = [...this.links, { source: currentNode.index!, target: this.nodes.length - 1 }]
+    this.simulation.nodes(this.nodes)
+    this.setForceLink()
+  }
+
+  removeNode(label: string) {
+    this.nodes = this.nodes.filter((n) => n.label !== label)
+    this.links = this.links.filter(
+      (l) => (l.source as NodeDatum).label !== label && (l.target as NodeDatum).label !== label,
+    )
     this.simulation.nodes(this.nodes)
     this.setForceLink()
   }
