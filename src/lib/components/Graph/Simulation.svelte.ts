@@ -27,6 +27,7 @@ export class Simulation {
   dragStarted!: (event: DragEvent) => void
   dragged!: (event: DragEvent) => void
   dragEnded!: (event: DragEvent) => void
+
   get xRange() {
     return [-this.width / 2, this.width / 2] as const
   }
@@ -43,7 +44,6 @@ export class Simulation {
     this.nodes = nodes
     this.width = width
     this.height = height
-    console.log("xRange", this.xRange, "yRange", this.yRange, "boundary", this.boundary)
     this.startSimulation()
   }
 
